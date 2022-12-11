@@ -1,46 +1,43 @@
 import UIKit
 import SwiftUI
 
-struct Transaction {
+struct Something {
     let date: String;
     let debit: Int;
     let credit: Int;
 }
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    
-    // Data model: These strings will be the data for the table view cells
-//    let animals: [String] = ["Horse", "Cow", "Camel", "Sheep", "Goat"]
-    
-    let transactions: [Transaction] = [
-        Transaction(date: "2022-10-20", debit: 234, credit: 5644),
-        Transaction(date: "2022-12-12", debit: 67, credit: 678),
-        Transaction(date: "2022-11-16", debit: 89, credit: 45),
-    ]
-    
-    // cell reuse id (cells that scroll out of view can be reused)
-    let cellReuseIdentifier = "cell"
-    
-    var tableView: UITableView = UITableView()
+    let cellReuseIdentifier = "cell";
+    let tableView: UITableView = UITableView();
+    let transactionController: TransactionController = TransactionController();
+    var transactionsByMonth: [TransactionByDate] = [TransactionByDate(date: "", debit: 0, credit: 0, count: 0)];
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor.green;
-        
+        self.view.addSubview(tableView)
+
         tableView.frame = CGRectMake(0, 0, UIScreen.main.bounds.width, UIScreen.main.bounds.height)
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellReuseIdentifier)
+        tableView.backgroundColor = UIColor.brown;
+        self.transactionsByMonth = self.transactionController.fetchByMonth(month: "12", year: "2022");
+//        self.transactionController.Insert(
+//            payload: Transaction(
+//                id: 2, amount: 879, description: "asasd", type: "debit", to_bank_id: "ashj", from_bank_id: "asj", category_id: "ajk", date: "2022-12-15", due: 0, row_id: "asdj"
+//            )
+//        )
+    }
         
-        self.view.addSubview(tableView)
-    }
-    
-    // number of rows in table view
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.transactions.count
+        return self.transactionsByMonth.count
     }
     
-    // create a cell for each table view row
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 70;
+    }
+        
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell:UITableViewCell = self.tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier)! as UITableViewCell;
         
@@ -50,23 +47,29 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         stack.translatesAutoresizingMaskIntoConstraints = false;
         stack.axis = .horizontal;
-        stack.alignment = .fill;
-        stack.distribution = .fillEqually;
-        stack.spacing = 60
+        stack.alignment = .center;
+        stack.distribution = .equalSpacing;
         stack.backgroundColor = UIColor.green
         stack.isLayoutMarginsRelativeArrangement = true;
-        stack.leadingAnchor.constraint(equalTo: cell.safeAreaLayoutGuide.leadingAnchor, constant: 10).isActive = true;
-        stack.trailingAnchor.constraint(equalTo: cell.safeAreaLayoutGuide.trailingAnchor, constant: 10).isActive = true;
-                
-        
+        stack.leadingAnchor.constraint(equalTo: cell.safeAreaLayoutGuide.leadingAnchor, constant: 20).isActive = true; // padding leading
+        stack.topAnchor.constraint(equalTo: cell.safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true; // padding top
+        stack.widthAnchor.constraint(equalToConstant: 350).isActive = true; // width of stack view
+        stack.heightAnchor.constraint(equalToConstant: 40).isActive = true; // height of stack view
+
         let dateLabel = UILabel();
-        dateLabel.text = self.transactions[indexPath.row].date;
-        
+        dateLabel.text = self.transactionsByMonth[indexPath.row].date;
+        dateLabel.backgroundColor = UIColor.blue;
+        dateLabel.widthAnchor.constraint(equalToConstant: 120).isActive = true
+
         let debitLabel = UILabel();
-        debitLabel.text = "\(self.transactions[indexPath.row].debit)";
+        debitLabel.text = "\(self.transactionsByMonth[indexPath.row].debit)";
+        debitLabel.backgroundColor = UIColor.purple;
+        debitLabel.widthAnchor.constraint(equalToConstant: 50).isActive = true
         
         let creditLabel = UILabel();
-        creditLabel.text = "\(self.transactions[indexPath.row].credit)";
+        creditLabel.text = "\(self.transactionsByMonth[indexPath.row].credit)";
+        creditLabel.backgroundColor = UIColor.yellow;
+        creditLabel.widthAnchor.constraint(equalToConstant: 50).isActive = true
         
         stack.addArrangedSubview(dateLabel);
         stack.addArrangedSubview(debitLabel);
@@ -74,8 +77,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         return cell
     }
-    
-    // method to run when table view cell is tapped
+        
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("You tapped cell number \(indexPath.row).")
     }
