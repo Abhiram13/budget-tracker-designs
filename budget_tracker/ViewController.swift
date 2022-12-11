@@ -1,12 +1,6 @@
 import UIKit
 import SwiftUI
 
-struct Something {
-    let date: String;
-    let debit: Int;
-    let credit: Int;
-}
-
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     let cellReuseIdentifier = "cell";
     let tableView: UITableView = UITableView();
@@ -53,7 +47,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         stack.isLayoutMarginsRelativeArrangement = true;
         stack.leadingAnchor.constraint(equalTo: cell.safeAreaLayoutGuide.leadingAnchor, constant: 20).isActive = true; // padding leading
         stack.topAnchor.constraint(equalTo: cell.safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true; // padding top
-        stack.widthAnchor.constraint(equalToConstant: 350).isActive = true; // width of stack view
+        stack.widthAnchor.constraint(equalToConstant: 370).isActive = true; // width of stack view
         stack.heightAnchor.constraint(equalToConstant: 40).isActive = true; // height of stack view
 
         let dateLabel = UILabel();
@@ -75,11 +69,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         stack.addArrangedSubview(debitLabel);
         stack.addArrangedSubview(creditLabel);
         
-        return cell
+        return cell;
     }
         
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("You tapped cell number \(indexPath.row).")
+        print("You tapped cell number \(self.transactionsByMonth[indexPath.row].date).")
+        navigationController?.pushViewController(DatewiseViewController(), animated: false)
     }
 }
 
