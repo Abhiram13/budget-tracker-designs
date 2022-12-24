@@ -28,6 +28,8 @@ class SchedularView: UIView {
         heightAnchor.constraint(equalToConstant: 100).isActive = true;
         backgroundColor = .red;
         layer.cornerRadius = 20;
+        layer.borderWidth = 2;
+        layer.borderColor = UIColor.blue.cgColor;
         addSubview(scheduleStack);
         
         self.scheduleStackConstraints();
@@ -43,8 +45,8 @@ class SchedularView: UIView {
         scheduleStack.addArrangedSubview(infoField);
         
         dateField.addSubview(dateLabel);
-        dateField.widthAnchor.constraint(equalToConstant: 100).isActive = true;
-        dateField.backgroundColor = .cyan;
+        dateField.widthAnchor.constraint(equalToConstant: 90).isActive = true;
+        dateField.backgroundColor = .blue;
         dateField.layer.cornerRadius = 20;
         dateField.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMinXMinYCorner];
         
@@ -58,11 +60,18 @@ class SchedularView: UIView {
     }
     
     private func dateFieldConstraints() -> Void {
-        dateLabel.text = "09:45";
+        dateLabel.text = "09:45    Join";
+        dateLabel.lineBreakMode = .byWordWrapping;
+        dateLabel.numberOfLines = 0;
+        dateLabel.textColor = .white;
+        dateLabel.font = UIFont.systemFont(ofSize: 20, weight: .bold)
         dateLabel.translatesAutoresizingMaskIntoConstraints = false;
+        dateLabel.widthAnchor.constraint(equalTo: dateField.widthAnchor, constant: 0).isActive = true;
         
         infoLabel.text = "Resume Consultation";
+        infoLabel.textColor = .white;
         infoLabel.translatesAutoresizingMaskIntoConstraints = false;
+        infoLabel.font = UIFont.systemFont(ofSize: 20, weight: .heavy)
         
         NSLayoutConstraint.activate([
             dateLabel.leadingAnchor.constraint(equalTo: dateField.leadingAnchor, constant: 10),
@@ -82,10 +91,10 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad();
         self.view.addSubview(container);
-        self.view.backgroundColor = .green;
+        self.view.backgroundColor = .white;
         
         self.containerConstraints();
-        self.mainLabelConstrainsts();        
+        self.mainLabelConstrainsts();
     }
         
     private func containerConstraints() -> Void {
@@ -94,7 +103,7 @@ class ViewController: UIViewController {
         container.translatesAutoresizingMaskIntoConstraints = false;
         container.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width - 20).isActive = true;
         container.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height * 0.5).isActive = true;
-        container.backgroundColor = .blue;
+        container.backgroundColor = .LightWhite;
         container.layer.cornerRadius = 10;
         container.addSubview(mainLabel);
         container.addSubview(customView);
