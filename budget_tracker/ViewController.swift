@@ -28,7 +28,7 @@ class SchedularView: UIView {
         heightAnchor.constraint(equalToConstant: 90).isActive = true;
         layer.cornerRadius = 20;
         layer.borderWidth = 2;
-        layer.borderColor = UIColor.blue.cgColor;
+        layer.borderColor = UIColor.ThemeBlue.cgColor;
         layer.shadowColor = UIColor.gray.cgColor;
         layer.shadowOpacity = 0.5
         layer.shadowOffset = CGSize(width: -1, height: 1)
@@ -49,7 +49,7 @@ class SchedularView: UIView {
         
         dateField.addSubview(dateLabel);
         dateField.widthAnchor.constraint(equalToConstant: 90).isActive = true;
-        dateField.backgroundColor = .blue;
+        dateField.backgroundColor = .ThemeBlue;
         dateField.layer.cornerRadius = 20;
         dateField.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMinXMinYCorner];
         
@@ -86,9 +86,41 @@ class SchedularView: UIView {
     }
 }
 
+class RevenueView: UIView {
+    override init(frame: CGRect) {
+        super.init(frame: frame);
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder);
+    }
+    
+    required init() {
+        super.init(frame: .zero);
+        self.initialize();
+    }
+    
+    private func initialize() -> Void {
+        translatesAutoresizingMaskIntoConstraints = false;
+        widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width - 50).isActive = true;
+        heightAnchor.constraint(equalToConstant: 90).isActive = true;
+        layer.cornerRadius = 20;
+        layer.borderWidth = 2;
+        layer.borderColor = UIColor.ThemeBlue.cgColor;
+        layer.shadowColor = UIColor.gray.cgColor;
+        layer.shadowOpacity = 0.5
+        layer.shadowOffset = CGSize(width: -1, height: 1)
+        layer.shadowRadius = 5
+//        addSubview(scheduleStack);
+        
+//        self.scheduleStackConstraints();
+    }
+}
+
 class ViewController: UIViewController {
     let container: UIView = UIView();
     let mainLabel: UILabel = UILabel();
+    let secondHeader: UILabel = UILabel();
     let scheduleView: UIView = UIView();
     let scheduleStack: UIStackView = UIStackView();
     
@@ -103,6 +135,7 @@ class ViewController: UIViewController {
         
     private func containerConstraints() -> Void {
         let customView: UIView = SchedularView();
+        let revenueView: UIView = RevenueView();
         
         container.translatesAutoresizingMaskIntoConstraints = false;
         container.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width - 20).isActive = true;
@@ -110,23 +143,34 @@ class ViewController: UIViewController {
         container.backgroundColor = .LightWhite;
         container.layer.cornerRadius = 10;
         container.addSubview(mainLabel);
+        container.addSubview(secondHeader);
         container.addSubview(customView);
+        container.addSubview(revenueView);
         
         NSLayoutConstraint.activate([
             container.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
             container.topAnchor.constraint(equalTo: view.topAnchor, constant: 50),
             customView.leadingAnchor.constraint(equalTo: container.leadingAnchor, constant: 20),
             customView.topAnchor.constraint(equalTo: container.topAnchor, constant: 75),
+            revenueView.leadingAnchor.constraint(equalTo: container.leadingAnchor, constant: 20),
+            revenueView.topAnchor.constraint(equalTo: container.topAnchor, constant: 235),
         ])
     }
         
     private func mainLabelConstrainsts() -> Void {
         mainLabel.text = "Start in 5 minutes";
         mainLabel.translatesAutoresizingMaskIntoConstraints = false;
+        mainLabel.font = UIFont.systemFont(ofSize: 20, weight: .semibold);
+        
+        secondHeader.text = "Revenue";
+        secondHeader.translatesAutoresizingMaskIntoConstraints = false;
+        secondHeader.font = UIFont.systemFont(ofSize: 20, weight: .semibold);
         
         NSLayoutConstraint.activate([
             mainLabel.leadingAnchor.constraint(equalTo: container.leadingAnchor, constant: 20),
-            mainLabel.topAnchor.constraint(equalTo: container.topAnchor, constant: 30)
+            mainLabel.topAnchor.constraint(equalTo: container.topAnchor, constant: 30),
+            secondHeader.leadingAnchor.constraint(equalTo: container.leadingAnchor, constant: 20),
+            secondHeader.topAnchor.constraint(equalTo: container.topAnchor, constant: 190)
         ])
     }
 }
