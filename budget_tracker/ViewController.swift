@@ -25,11 +25,14 @@ class SchedularView: UIView {
     private func initialize() -> Void {
         translatesAutoresizingMaskIntoConstraints = false;
         widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width - 50).isActive = true;
-        heightAnchor.constraint(equalToConstant: 100).isActive = true;
-        backgroundColor = .red;
+        heightAnchor.constraint(equalToConstant: 90).isActive = true;
         layer.cornerRadius = 20;
         layer.borderWidth = 2;
         layer.borderColor = UIColor.blue.cgColor;
+        layer.shadowColor = UIColor.gray.cgColor;
+        layer.shadowOpacity = 0.5
+        layer.shadowOffset = CGSize(width: -1, height: 1)
+        layer.shadowRadius = 5
         addSubview(scheduleStack);
         
         self.scheduleStackConstraints();
@@ -52,9 +55,10 @@ class SchedularView: UIView {
         
         infoField.addSubview(infoLabel)
         infoField.widthAnchor.constraint(equalToConstant: 160).isActive = true;
-        infoField.backgroundColor = .magenta;
+        infoField.backgroundColor = .white;
         infoField.layer.cornerRadius = 20;
         infoField.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMaxXMaxYCorner];
+        infoField.layoutMargins = UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0);
         
         self.dateFieldConstraints();
     }
@@ -69,15 +73,15 @@ class SchedularView: UIView {
         dateLabel.widthAnchor.constraint(equalTo: dateField.widthAnchor, constant: 0).isActive = true;
         
         infoLabel.text = "Resume Consultation";
-        infoLabel.textColor = .white;
+        infoLabel.textColor = .black;
         infoLabel.translatesAutoresizingMaskIntoConstraints = false;
-        infoLabel.font = UIFont.systemFont(ofSize: 20, weight: .heavy)
+        infoLabel.font = UIFont.systemFont(ofSize: 22, weight: .semibold);
         
         NSLayoutConstraint.activate([
-            dateLabel.leadingAnchor.constraint(equalTo: dateField.leadingAnchor, constant: 10),
-            dateLabel.topAnchor.constraint(equalTo: dateField.topAnchor, constant: 10),
-            infoLabel.leadingAnchor.constraint(equalTo: infoField.leadingAnchor, constant: 10),
-            infoLabel.topAnchor.constraint(equalTo: infoField.topAnchor, constant: 10)
+            dateLabel.leadingAnchor.constraint(equalTo: dateField.leadingAnchor, constant: 20),
+            dateLabel.topAnchor.constraint(equalTo: dateField.topAnchor, constant: 20),
+            infoLabel.leadingAnchor.constraint(equalTo: infoField.leadingAnchor, constant: 20),
+            infoLabel.topAnchor.constraint(equalTo: infoField.topAnchor, constant: 30)
         ]);
     }
 }
