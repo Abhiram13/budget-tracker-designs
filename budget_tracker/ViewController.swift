@@ -7,6 +7,8 @@ class SchedularView: UIView {
     let infoField: UIView = UIView();
     let dateLabel: UILabel = UILabel();
     let infoLabel: UILabel = UILabel();
+    let timeLabel: UILabel = UILabel();
+    let memberLabel: UILabel = UILabel();
     let controller: ViewController = ViewController();
     
     override init(frame: CGRect) {
@@ -54,6 +56,8 @@ class SchedularView: UIView {
         dateField.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMinXMinYCorner];
         
         infoField.addSubview(infoLabel)
+        infoField.addSubview(timeLabel);
+        infoField.addSubview(memberLabel);
         infoField.widthAnchor.constraint(equalToConstant: 160).isActive = true;
         infoField.backgroundColor = .white;
         infoField.layer.cornerRadius = 20;
@@ -77,11 +81,25 @@ class SchedularView: UIView {
         infoLabel.translatesAutoresizingMaskIntoConstraints = false;
         infoLabel.font = UIFont.systemFont(ofSize: 22, weight: .semibold);
         
+        timeLabel.text = "30 min";
+        timeLabel.textColor = .black;
+        timeLabel.translatesAutoresizingMaskIntoConstraints = false;
+        timeLabel.font = UIFont.systemFont(ofSize: 18, weight: .medium);
+        
+        memberLabel.text = "Aslynn Dias";
+        memberLabel.textColor = .black;
+        memberLabel.translatesAutoresizingMaskIntoConstraints = false;
+        memberLabel.font = UIFont.systemFont(ofSize: 18, weight: .medium);
+        
         NSLayoutConstraint.activate([
             dateLabel.leadingAnchor.constraint(equalTo: dateField.leadingAnchor, constant: 20),
             dateLabel.topAnchor.constraint(equalTo: dateField.topAnchor, constant: 20),
             infoLabel.leadingAnchor.constraint(equalTo: infoField.leadingAnchor, constant: 20),
-            infoLabel.topAnchor.constraint(equalTo: infoField.topAnchor, constant: 30)
+            infoLabel.topAnchor.constraint(equalTo: infoField.topAnchor, constant: 20),
+            timeLabel.leadingAnchor.constraint(equalTo: infoField.leadingAnchor, constant: 20),
+            timeLabel.topAnchor.constraint(equalTo: infoField.topAnchor, constant: 50),
+            memberLabel.leadingAnchor.constraint(equalTo: infoField.leadingAnchor, constant: 100),
+            memberLabel.topAnchor.constraint(equalTo: infoField.topAnchor, constant: 50)
         ]);
     }
 }
@@ -123,6 +141,7 @@ class RevenueView: UIView {
         firstLabel.text = "PAID TO YOU";
         firstLabel.textColor = .black;
         firstLabel.translatesAutoresizingMaskIntoConstraints = false;
+        firstLabel.font = UIFont.systemFont(ofSize: 13, weight: .regular)
         
         NSLayoutConstraint.activate([
             firstLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 20),
