@@ -15,6 +15,8 @@
 		8344776F2945815F00E9739E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8344776D2945815F00E9739E /* LaunchScreen.storyboard */; };
 		83A319E22957366C00222C0F /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A319E12957366C00222C0F /* Colors.swift */; };
 		83B244E0295821D1003437A1 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B244DF295821D1003437A1 /* TabBarController.swift */; };
+		83B244E429585951003437A1 /* ScheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B244E329585951003437A1 /* ScheduleView.swift */; };
+		83B244E629585998003437A1 /* RevenueView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B244E529585998003437A1 /* RevenueView.swift */; };
 		83B9A58C2945C97700B70380 /* DbController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B9A58B2945C97700B70380 /* DbController.swift */; };
 		83B9A58E2945CAF000B70380 /* TransactionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B9A58D2945CAF000B70380 /* TransactionController.swift */; };
 		83B9A5912945EBD300B70380 /* DateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B9A5902945EBD300B70380 /* DateManager.swift */; };
@@ -32,6 +34,8 @@
 		834477702945815F00E9739E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		83A319E12957366C00222C0F /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		83B244DF295821D1003437A1 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		83B244E329585951003437A1 /* ScheduleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleView.swift; sourceTree = "<group>"; };
+		83B244E529585998003437A1 /* RevenueView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RevenueView.swift; sourceTree = "<group>"; };
 		83B9A58B2945C97700B70380 /* DbController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DbController.swift; sourceTree = "<group>"; };
 		83B9A58D2945CAF000B70380 /* TransactionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionController.swift; sourceTree = "<group>"; };
 		83B9A5902945EBD300B70380 /* DateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateManager.swift; sourceTree = "<group>"; };
@@ -68,6 +72,7 @@
 		834477612945815D00E9739E /* budget_tracker */ = {
 			isa = PBXGroup;
 			children = (
+				83B244E129585930003437A1 /* Views */,
 				83B9A5922945F27A00B70380 /* ViewControllers */,
 				83B9A58F2945EBB400B70380 /* Helpers */,
 				83B9A58A2945C95500B70380 /* Controllers */,
@@ -81,6 +86,23 @@
 				83B244DF295821D1003437A1 /* TabBarController.swift */,
 			);
 			path = budget_tracker;
+			sourceTree = "<group>";
+		};
+		83B244E129585930003437A1 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				83B244E22958593A003437A1 /* Home */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		83B244E22958593A003437A1 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				83B244E329585951003437A1 /* ScheduleView.swift */,
+				83B244E529585998003437A1 /* RevenueView.swift */,
+			);
+			path = Home;
 			sourceTree = "<group>";
 		};
 		83B9A58A2945C95500B70380 /* Controllers */ = {
@@ -184,7 +206,9 @@
 				83A319E22957366C00222C0F /* Colors.swift in Sources */,
 				83B9A5912945EBD300B70380 /* DateManager.swift in Sources */,
 				83B244E0295821D1003437A1 /* TabBarController.swift in Sources */,
+				83B244E629585998003437A1 /* RevenueView.swift in Sources */,
 				834477632945815D00E9739E /* AppDelegate.swift in Sources */,
+				83B244E429585951003437A1 /* ScheduleView.swift in Sources */,
 				83B9A58E2945CAF000B70380 /* TransactionController.swift in Sources */,
 				834477652945815D00E9739E /* SceneDelegate.swift in Sources */,
 				83B9A5942945F2AD00B70380 /* DatewiseViewController.swift in Sources */,
