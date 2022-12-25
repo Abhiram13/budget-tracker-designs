@@ -1,33 +1,6 @@
 import Foundation;
 import UIKit;
 
-class BoldLabel: UILabel {
-    let content: String;
-    
-    override init(frame: CGRect) {
-        self.content = "";
-        super.init(frame: frame);
-    }
-    
-    required init?(coder: NSCoder) {
-        self.content = "";
-        super.init(coder: coder);
-    }
-    
-    required init(text: String) {
-        self.content = text;
-        super.init(frame: .zero);
-        self.initialize();
-    }
-    
-    private func initialize() -> Void {
-        text = self.content;
-        textAlignment = .center;
-        font = UIFont.systemFont(ofSize: 30, weight: .bold);
-        translatesAutoresizingMaskIntoConstraints = false;
-    }
-}
-
 class RevenueView: UIView {
     let firstLabel: UILabel = UILabel();
     let stack = UIStackView();
@@ -77,16 +50,36 @@ class RevenueView: UIView {
         self.stackViewConstraint();
     }
     
+    private func AmountBoldLabel(content: String) -> UILabel {
+        let label: UILabel = UILabel();
+        label.text = content;
+        label.textAlignment = .center;
+        label.font = UIFont.systemFont(ofSize: 30, weight: .bold);
+        label.translatesAutoresizingMaskIntoConstraints = false;
+        
+        return label;
+    }
+    
+    private func DurationTypeLabel(content: String) -> UILabel {
+        let label: UILabel = UILabel();
+        label.text = content;
+        label.textAlignment = .center;
+        label.font = UIFont.systemFont(ofSize: 13, weight: .regular);
+        label.translatesAutoresizingMaskIntoConstraints = false;
+        
+        return label;
+    }
+    
     private func stackViewConstraint() -> Void {
         let firstStackChild: UIView = UIView();
         let secondStackChild: UIView = UIView();
         
-        let firstStackChildtopLabel: UILabel = UILabel();
-        let firstStackChildMiddleLabel: UILabel = BoldLabel(text: "$15,000");
+        let firstStackChildtopLabel: UILabel = DurationTypeLabel(content: "THIS MONTH");
+        let firstStackChildMiddleLabel: UILabel = AmountBoldLabel(content: "$15,000");
         let firstStackChildBottomLabel: UILabel = UILabel();
         
-        let secondStackChildTopLabel: UILabel = UILabel();
-        let secondStackChildBottomLabel: UILabel = BoldLabel(text: "$72,000");
+        let secondStackChildTopLabel: UILabel = DurationTypeLabel(content: "THIS YEAR");
+        let secondStackChildBottomLabel: UILabel = AmountBoldLabel(content: "$72,000");
         
         stack.addArrangedSubview(firstStackChild);
         stack.addArrangedSubview(secondStackChild);
@@ -104,31 +97,11 @@ class RevenueView: UIView {
         secondStackChild.addSubview(secondStackChildTopLabel);
         secondStackChild.addSubview(secondStackChildBottomLabel);
         
-        firstStackChildtopLabel.text = "THIS MONTH";
-        firstStackChildtopLabel.textAlignment = .center;
-        firstStackChildtopLabel.font = UIFont.systemFont(ofSize: 13, weight: .regular);
-        firstStackChildtopLabel.translatesAutoresizingMaskIntoConstraints = false;
-        
-//        firstStackChildMiddleLabel.text = "$15,000";
-//        firstStackChildMiddleLabel.textAlignment = .center;
-//        firstStackChildMiddleLabel.font = UIFont.systemFont(ofSize: 30, weight: .bold);
-//        firstStackChildMiddleLabel.translatesAutoresizingMaskIntoConstraints = false;
-        
         firstStackChildBottomLabel.text = "$13K LAST MONTH";
         firstStackChildBottomLabel.textAlignment = .center;
         firstStackChildBottomLabel.textColor = .ThemeGreen;
         firstStackChildBottomLabel.font = UIFont.systemFont(ofSize: 14, weight: .semibold);
-        firstStackChildBottomLabel.translatesAutoresizingMaskIntoConstraints = false;
-        
-        secondStackChildTopLabel.text = "THIS YEAR";
-        secondStackChildTopLabel.textAlignment = .center;
-        secondStackChildTopLabel.font = UIFont.systemFont(ofSize: 13, weight: .regular);
-        secondStackChildTopLabel.translatesAutoresizingMaskIntoConstraints = false;
-        
-//        secondStackChildBottomLabel.text = "$72,000";
-//        secondStackChildBottomLabel.textAlignment = .center;
-//        secondStackChildBottomLabel.font = UIFont.systemFont(ofSize: 30, weight: .bold);
-//        secondStackChildBottomLabel.translatesAutoresizingMaskIntoConstraints = false;
+        firstStackChildBottomLabel.translatesAutoresizingMaskIntoConstraints = false;        
         
         NSLayoutConstraint.activate([
             stack.widthAnchor.constraint(equalTo: widthAnchor, constant: -40),
