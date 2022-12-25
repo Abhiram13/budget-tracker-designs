@@ -87,6 +87,8 @@ class SchedularView: UIView {
 }
 
 class RevenueView: UIView {
+    let firstLabel: UILabel = UILabel();
+    
     override init(frame: CGRect) {
         super.init(frame: frame);
     }
@@ -101,6 +103,7 @@ class RevenueView: UIView {
     }
     
     private func initialize() -> Void {
+        backgroundColor = .white;
         translatesAutoresizingMaskIntoConstraints = false;
         widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width - 50).isActive = true;
         heightAnchor.constraint(equalToConstant: 90).isActive = true;
@@ -110,10 +113,21 @@ class RevenueView: UIView {
         layer.shadowColor = UIColor.gray.cgColor;
         layer.shadowOpacity = 0.5
         layer.shadowOffset = CGSize(width: -1, height: 1)
-        layer.shadowRadius = 5
-//        addSubview(scheduleStack);
+        layer.shadowRadius = 5;
+        addSubview(firstLabel);
         
-//        self.scheduleStackConstraints();
+        self.firstLabelConstraint();
+    }
+    
+    private func firstLabelConstraint() -> Void {
+        firstLabel.text = "PAID TO YOU";
+        firstLabel.textColor = .black;
+        firstLabel.translatesAutoresizingMaskIntoConstraints = false;
+        
+        NSLayoutConstraint.activate([
+            firstLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 20),
+            firstLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20)
+        ])
     }
 }
 
