@@ -21,6 +21,9 @@
 		83B9A58E2945CAF000B70380 /* TransactionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B9A58D2945CAF000B70380 /* TransactionController.swift */; };
 		83B9A5912945EBD300B70380 /* DateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B9A5902945EBD300B70380 /* DateManager.swift */; };
 		83B9A5942945F2AD00B70380 /* DatewiseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B9A5932945F2AD00B70380 /* DatewiseViewController.swift */; };
+		83BBE1E52959839D008690B7 /* StackLabels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83BBE1E42959839D008690B7 /* StackLabels.swift */; };
+		83BBE1E7295983D5008690B7 /* Types.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83BBE1E6295983D5008690B7 /* Types.swift */; };
+		83BBE1E929598418008690B7 /* AmountStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83BBE1E829598418008690B7 /* AmountStackView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +43,9 @@
 		83B9A58D2945CAF000B70380 /* TransactionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionController.swift; sourceTree = "<group>"; };
 		83B9A5902945EBD300B70380 /* DateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateManager.swift; sourceTree = "<group>"; };
 		83B9A5932945F2AD00B70380 /* DatewiseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatewiseViewController.swift; sourceTree = "<group>"; };
+		83BBE1E42959839D008690B7 /* StackLabels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackLabels.swift; sourceTree = "<group>"; };
+		83BBE1E6295983D5008690B7 /* Types.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Types.swift; sourceTree = "<group>"; };
+		83BBE1E829598418008690B7 /* AmountStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmountStackView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +90,7 @@
 				8344776D2945815F00E9739E /* LaunchScreen.storyboard */,
 				834477702945815F00E9739E /* Info.plist */,
 				83B244DF295821D1003437A1 /* TabBarController.swift */,
+				83BBE1E6295983D5008690B7 /* Types.swift */,
 			);
 			path = budget_tracker;
 			sourceTree = "<group>";
@@ -101,6 +108,7 @@
 			children = (
 				83B244E329585951003437A1 /* ScheduleView.swift */,
 				83B244E529585998003437A1 /* RevenueView.swift */,
+				83BBE1E829598418008690B7 /* AmountStackView.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -119,6 +127,7 @@
 			children = (
 				83B9A5902945EBD300B70380 /* DateManager.swift */,
 				83A319E12957366C00222C0F /* Colors.swift */,
+				83BBE1E42959839D008690B7 /* StackLabels.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -203,12 +212,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				834477672945815D00E9739E /* ViewController.swift in Sources */,
+				83BBE1E52959839D008690B7 /* StackLabels.swift in Sources */,
 				83A319E22957366C00222C0F /* Colors.swift in Sources */,
 				83B9A5912945EBD300B70380 /* DateManager.swift in Sources */,
 				83B244E0295821D1003437A1 /* TabBarController.swift in Sources */,
 				83B244E629585998003437A1 /* RevenueView.swift in Sources */,
 				834477632945815D00E9739E /* AppDelegate.swift in Sources */,
+				83BBE1E929598418008690B7 /* AmountStackView.swift in Sources */,
 				83B244E429585951003437A1 /* ScheduleView.swift in Sources */,
+				83BBE1E7295983D5008690B7 /* Types.swift in Sources */,
 				83B9A58E2945CAF000B70380 /* TransactionController.swift in Sources */,
 				834477652945815D00E9739E /* SceneDelegate.swift in Sources */,
 				83B9A5942945F2AD00B70380 /* DatewiseViewController.swift in Sources */,
