@@ -39,12 +39,16 @@ class RevenueStackView: UIStackView {
         firstStackChild.addSubview(leadingMiddleLabel);
         if leadingBottomLabel != nil {
             firstStackChild.addSubview(leadingBottomLabel!);
+            leadingBottomLabel!.topAnchor.constraint(equalTo: firstStackChild.topAnchor, constant: 70).isActive = true;
+            leadingBottomLabel!.widthAnchor.constraint(equalTo: firstStackChild.widthAnchor, constant: 0).isActive = true;
         }
         
         secondStackChild.addSubview(trailingTopLabel);
         secondStackChild.addSubview(trailingMiddleLabel);
         if trailingBottomLabel != nil {
             secondStackChild.addSubview(trailingBottomLabel!);
+            trailingBottomLabel!.topAnchor.constraint(equalTo: secondStackChild.topAnchor, constant: 70).isActive = true;
+            trailingBottomLabel!.widthAnchor.constraint(equalTo: secondStackChild.widthAnchor, constant: 0).isActive = true;
         }
         
         NSLayoutConstraint.activate([
@@ -59,8 +63,6 @@ class RevenueStackView: UIStackView {
             leadingTopLabel.widthAnchor.constraint(equalTo: firstStackChild.widthAnchor, constant: 0),
             leadingMiddleLabel.topAnchor.constraint(equalTo: firstStackChild.topAnchor, constant: 32),
             leadingMiddleLabel.widthAnchor.constraint(equalTo: firstStackChild.widthAnchor, constant: 0),
-            leadingBottomLabel!.topAnchor.constraint(equalTo: firstStackChild.topAnchor, constant: 70),
-            leadingBottomLabel!.widthAnchor.constraint(equalTo: firstStackChild.widthAnchor, constant: 0),
             trailingTopLabel.topAnchor.constraint(equalTo: secondStackChild.topAnchor, constant: 15),
             trailingTopLabel.widthAnchor.constraint(equalTo: secondStackChild.widthAnchor, constant: 0),
             trailingMiddleLabel.topAnchor.constraint(equalTo: secondStackChild.topAnchor, constant: 32),
