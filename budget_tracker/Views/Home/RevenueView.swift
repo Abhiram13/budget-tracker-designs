@@ -85,12 +85,12 @@ class RevenueView: UIView {
         firstLabel.text = "PAID TO YOU";
         firstLabel.textColor = .black;
         firstLabel.translatesAutoresizingMaskIntoConstraints = false;
-        firstLabel.font = UIFont.systemFont(ofSize: 15, weight: .medium)
+        firstLabel.font = UIFont.systemFont(ofSize: 13, weight: .regular)
         
         secondLabel.text = "OUTSTANDING PAYMENTS";
         secondLabel.textColor = .black;
         secondLabel.translatesAutoresizingMaskIntoConstraints = false;
-        secondLabel.font = UIFont.systemFont(ofSize: 15, weight: .medium)
+        secondLabel.font = UIFont.systemFont(ofSize: 13, weight: .regular)
         
         NSLayoutConstraint.activate([
             firstLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 20),
