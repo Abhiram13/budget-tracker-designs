@@ -25,12 +25,10 @@ class RevenueView: UIView {
         widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width - 50).isActive = true;
         heightAnchor.constraint(equalToConstant: 320).isActive = true;
         layer.cornerRadius = 20;
-        layer.borderWidth = 2;
-        layer.borderColor = UIColor.ThemeBlue.cgColor;
         layer.shadowColor = UIColor.gray.cgColor;
         layer.shadowOpacity = 0.5
-        layer.shadowOffset = CGSize(width: -1, height: 1)
-        layer.shadowRadius = 5;
+        layer.shadowOffset = CGSize(width: 0, height: 1)
+        layer.shadowRadius = 2;
     }
     
     private func initialize() -> Void {

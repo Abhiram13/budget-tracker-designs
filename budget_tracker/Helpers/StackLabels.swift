@@ -2,6 +2,9 @@ import Foundation;
 import UIKit;
 
 class StackLabelDesign {
+    /**
+     - Returns: UILabel
+     */
     static func AmountLabel(content: String) -> UILabel {
         let label: UILabel = UILabel();
         label.text = content;
