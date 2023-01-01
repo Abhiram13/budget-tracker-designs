@@ -1,63 +1,41 @@
 import UIKit
 import SwiftUI
 
-class ViewController: UIViewController {
-    let container: UIView = UIView();
-    let mainLabel: UILabel = UILabel();
-    let secondHeader: UILabel = UILabel();
-    let scheduleView: UIView = UIView();
-    let scheduleStack: UIStackView = UIStackView();
+class ViewController: UIViewController, UIScrollViewDelegate {
+    let scroll = UIScrollView();
+    let stack = UIStackView();
     
     override func viewDidLoad() {
         super.viewDidLoad();
-        self.view.addSubview(container);
-        self.view.backgroundColor = .white;
+        view.backgroundColor = .white;
+        view.addSubview(scroll);
+        scroll.delegate = self;
+        scroll.contentSize = CGSize(width: 100, height: 100)
+        scroll.addSubview(stack);
+        scroll.translatesAutoresizingMaskIntoConstraints = false;
+        scroll.backgroundColor = .blue;
+        scroll.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        scroll.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        scroll.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        scroll.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -200).isActive = true
+                
+        stack.translatesAutoresizingMaskIntoConstraints = false;
+        stack.isLayoutMarginsRelativeArrangement = true;
+        stack.topAnchor.constraint(equalTo: scroll.topAnchor).isActive = true
+        stack.leftAnchor.constraint(equalTo: scroll.leftAnchor).isActive = true
+        stack.rightAnchor.constraint(equalTo: scroll.rightAnchor).isActive = true
+        stack.bottomAnchor.constraint(equalTo: scroll.bottomAnchor).isActive = true
+        stack.heightAnchor.constraint(equalToConstant: 100).isActive = true
+        stack.backgroundColor = .green;
+        stack.axis = .horizontal;
         
-        self.containerConstraints();
-        self.mainLabelConstrainsts();
-    }
-        
-    private func containerConstraints() -> Void {
-        let scheduleView: UIView = SchedularView();
-        let revenueView: UIView = RevenueView();
-        
-        container.translatesAutoresizingMaskIntoConstraints = false;
-        container.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width - 20).isActive = true;
-        container.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height * 0.5).isActive = true;
-        container.backgroundColor = .LightWhite;
-        container.layer.cornerRadius = 10;
-        container.addSubview(mainLabel);
-        container.addSubview(secondHeader);
-        container.addSubview(scheduleView);
-        container.addSubview(revenueView);
-        
-        scheduleView.layoutMargins = UIEdgeInsets(top: 10, left: 10, bottom: 70, right: 10);
-        
-        NSLayoutConstraint.activate([
-            container.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
-            container.topAnchor.constraint(equalTo: view.topAnchor, constant: 50),
-            scheduleView.leadingAnchor.constraint(equalTo: container.leadingAnchor, constant: 20),
-            scheduleView.topAnchor.constraint(equalTo: container.topAnchor, constant: 75),
-            revenueView.leadingAnchor.constraint(equalTo: container.leadingAnchor, constant: 20),
-            revenueView.topAnchor.constraint(equalTo: container.topAnchor, constant: 235),
-        ])
-    }
-        
-    private func mainLabelConstrainsts() -> Void {
-        mainLabel.text = "Start in 5 minutes";
-        mainLabel.translatesAutoresizingMaskIntoConstraints = false;
-        mainLabel.font = UIFont.systemFont(ofSize: 20, weight: .semibold);
-        
-        secondHeader.text = "Revenue";
-        secondHeader.translatesAutoresizingMaskIntoConstraints = false;
-        secondHeader.font = UIFont.systemFont(ofSize: 20, weight: .semibold);
-        
-        NSLayoutConstraint.activate([
-            mainLabel.leadingAnchor.constraint(equalTo: container.leadingAnchor, constant: 20),
-            mainLabel.topAnchor.constraint(equalTo: container.topAnchor, constant: 30),
-            secondHeader.leadingAnchor.constraint(equalTo: container.leadingAnchor, constant: 20),
-            secondHeader.topAnchor.constraint(equalTo: container.topAnchor, constant: 190)
-        ])
+        for i in 1...10 {
+            let label = UILabel();
+            label.text = "Hello \(i)";
+            label.textColor = .black;
+            stack.addArrangedSubview(label);
+            label.widthAnchor.constraint(equalToConstant: 100).isActive = true
+        }
     }
 }
 

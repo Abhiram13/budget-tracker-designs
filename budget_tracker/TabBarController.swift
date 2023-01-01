@@ -6,11 +6,11 @@ class TabBarController: UITabBarController {
         super.viewDidLoad();
         
         let homeViewController: ViewController = ViewController();
-        let dateWiseController: DatewiseViewController = DatewiseViewController();
+        let calenderViewController: CalenderViewController = CalenderViewController();
         
         homeViewController.title = "Home";
-        dateWiseController.title = "Date Wise";
+        calenderViewController.title = "Calender";
         
-        self.setViewControllers([homeViewController, dateWiseController], animated: false);
+        self.setViewControllers([homeViewController, calenderViewController], animated: false);
     }
 }

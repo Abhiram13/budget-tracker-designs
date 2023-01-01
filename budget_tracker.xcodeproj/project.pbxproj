@@ -20,7 +20,7 @@
 		83B9A58C2945C97700B70380 /* DbController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B9A58B2945C97700B70380 /* DbController.swift */; };
 		83B9A58E2945CAF000B70380 /* TransactionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B9A58D2945CAF000B70380 /* TransactionController.swift */; };
 		83B9A5912945EBD300B70380 /* DateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B9A5902945EBD300B70380 /* DateManager.swift */; };
-		83B9A5942945F2AD00B70380 /* DatewiseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B9A5932945F2AD00B70380 /* DatewiseViewController.swift */; };
+		83B9A5942945F2AD00B70380 /* CalenderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B9A5932945F2AD00B70380 /* CalenderViewController.swift */; };
 		83BBE1E52959839D008690B7 /* StackLabels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83BBE1E42959839D008690B7 /* StackLabels.swift */; };
 		83BBE1E7295983D5008690B7 /* Types.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83BBE1E6295983D5008690B7 /* Types.swift */; };
 		83BBE1E929598418008690B7 /* AmountStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83BBE1E829598418008690B7 /* AmountStackView.swift */; };
@@ -42,7 +42,7 @@
 		83B9A58B2945C97700B70380 /* DbController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DbController.swift; sourceTree = "<group>"; };
 		83B9A58D2945CAF000B70380 /* TransactionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionController.swift; sourceTree = "<group>"; };
 		83B9A5902945EBD300B70380 /* DateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateManager.swift; sourceTree = "<group>"; };
-		83B9A5932945F2AD00B70380 /* DatewiseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatewiseViewController.swift; sourceTree = "<group>"; };
+		83B9A5932945F2AD00B70380 /* CalenderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalenderViewController.swift; sourceTree = "<group>"; };
 		83BBE1E42959839D008690B7 /* StackLabels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackLabels.swift; sourceTree = "<group>"; };
 		83BBE1E6295983D5008690B7 /* Types.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Types.swift; sourceTree = "<group>"; };
 		83BBE1E829598418008690B7 /* AmountStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmountStackView.swift; sourceTree = "<group>"; };
@@ -135,7 +135,7 @@
 		83B9A5922945F27A00B70380 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				83B9A5932945F2AD00B70380 /* DatewiseViewController.swift */,
+				83B9A5932945F2AD00B70380 /* CalenderViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -223,7 +223,7 @@
 				83BBE1E7295983D5008690B7 /* Types.swift in Sources */,
 				83B9A58E2945CAF000B70380 /* TransactionController.swift in Sources */,
 				834477652945815D00E9739E /* SceneDelegate.swift in Sources */,
-				83B9A5942945F2AD00B70380 /* DatewiseViewController.swift in Sources */,
+				83B9A5942945F2AD00B70380 /* CalenderViewController.swift in Sources */,
 				83B9A58C2945C97700B70380 /* DbController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
