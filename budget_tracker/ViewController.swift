@@ -96,50 +96,87 @@ class TextView: UILabel {
 }
 
 class ViewController: UIViewController, UIScrollViewDelegate {
-    let scroll = UIScrollView();
-    let stack = UIStackView();
-    let pieChartView = PieChartView();
-    let text = TextView();
+    let scroll = ScrollView();
+    let stack = StackView();
     
     override func viewDidLoad() {
         super.viewDidLoad();
         view.backgroundColor = .white;
         view.addSubview(scroll);
         scroll.delegate = self;
-        scroll.contentSize = CGSize(width: 100, height: 100)
         scroll.addSubview(stack);
-        scroll.translatesAutoresizingMaskIntoConstraints = false;
-        scroll.backgroundColor = .blue;
-        scroll.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        scroll.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-        scroll.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
-        scroll.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -200).isActive = true
-        scroll.addSubview(text);
-                
-        stack.translatesAutoresizingMaskIntoConstraints = false;
-        stack.isLayoutMarginsRelativeArrangement = true;
-        stack.topAnchor.constraint(equalTo: scroll.topAnchor).isActive = true
-        stack.leftAnchor.constraint(equalTo: scroll.leftAnchor).isActive = true
-        stack.rightAnchor.constraint(equalTo: scroll.rightAnchor).isActive = true
-        stack.bottomAnchor.constraint(equalTo: scroll.bottomAnchor).isActive = true
-        stack.heightAnchor.constraint(equalToConstant: 100).isActive = true
-        stack.backgroundColor = .green;
-        stack.axis = .horizontal;
-        
-//        view.addSubview(pieChartView);
-//        pieChartView.frame = CGRect(x: 0, y: 0, width: view.frame.size.width, height: 400)
-//        pieChartView.segments = [
-//            Segment(color: .red, value: 57),
-//            Segment(color: .blue, value: 30),
-//            Segment(color: .green, value: 25),
-//            Segment(color: .yellow, value: 40)
-//        ];
+    }
+}
+
+class ScrollView: UIScrollView {
+    private var parent: UIView = UIView();
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder);
+    }
+    
+    required init() {
+        super.init(frame: .zero);
+    }
+    
+    override func didMoveToSuperview() {
+        parent = self.superview!;
+        self.initlize();
+    }
+    
+    private func initlize() -> Void {
+        let stack = StackView();
+        contentSize = CGSize(width: 100, height: 100)
+        addSubview(stack);
+        translatesAutoresizingMaskIntoConstraints = false;
+        backgroundColor = .blue;
+        topAnchor.constraint(equalTo: parent.topAnchor).isActive = true
+        leftAnchor.constraint(equalTo: parent.leftAnchor).isActive = true
+        rightAnchor.constraint(equalTo: parent.rightAnchor).isActive = true
+        bottomAnchor.constraint(equalTo: parent.bottomAnchor, constant: -200).isActive = true
+    }
+}
+
+class StackView: UIStackView {
+    private var parent: UIView = UIView();
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+    }
+    
+    required init(coder: NSCoder) {
+        super.init(coder: coder);
+    }
+    
+    required init() {
+        super.init(frame: .zero);
+    }
+    
+    override func didMoveToSuperview() {
+        parent = self.superview!;
+        self.initalise();
+    }
+    
+    private func initalise() -> Void {
+        translatesAutoresizingMaskIntoConstraints = false;
+        isLayoutMarginsRelativeArrangement = true;
+        topAnchor.constraint(equalTo: parent.topAnchor).isActive = true
+        leftAnchor.constraint(equalTo: parent.leftAnchor).isActive = true
+        rightAnchor.constraint(equalTo: parent.rightAnchor).isActive = true
+        bottomAnchor.constraint(equalTo: parent.bottomAnchor).isActive = true
+        heightAnchor.constraint(equalToConstant: 100).isActive = true
+        backgroundColor = .green;
+        axis = .horizontal;
         
         for i in 1...10 {
             let label = UILabel();
             label.text = "Hello \(i)";
             label.textColor = .black;
-            stack.addArrangedSubview(label);
+            addArrangedSubview(label);
             label.widthAnchor.constraint(equalToConstant: 100).isActive = true
         }
     }
