@@ -1,6 +1,11 @@
 import UIKit
 import SwiftUI
 
+struct ChartLabelwithColor {
+    let label: String;
+    let color: UIColor;
+}
+
 struct Segment {
     // the color of a given segment
     var color: UIColor
@@ -65,46 +70,43 @@ class PieChartView: UIView {
     }
 }
 
-class TextView: UILabel {
-    private var parent: UIView = UIView();
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-    }
-    
-    required init?(coder: NSCoder) {
-        super.init(coder: coder);
-    }
-    
-    required init() {
-        super.init(frame: .zero);
-        print("Super view is \(self.superview)");
-    }
-    
-    override func didMoveToSuperview() {
-        parent = self.superview!;
-        print("Super view is now \(parent)");
-        self.initilise();
-    }
-    
-    private func initilise() -> Void {
-        self.text = "Hello world";
-        self.textColor = .black;
-        self.translatesAutoresizingMaskIntoConstraints = false;
-        self.topAnchor.constraint(equalTo: parent.topAnchor, constant: 100).isActive = true;
-    }
-}
-
 class ViewController: UIViewController, UIScrollViewDelegate {
     let scroll = ScrollView();
     let stack = StackView();
+    let chartContainer = UIView();
     
     override func viewDidLoad() {
+        let labelStack = UIStackView();
+        let labels: [ChartLabelwithColor] = [
+            .init(label: "Salary", color: .blue),
+            .init(label: "Medicine", color: .red),
+            .init(label: "Restarunt", color: .orange),
+            .init(label: "Cloth", color: .purple),
+            .init(label: "Fuel", color: .green)
+        ]
         super.viewDidLoad();
         view.backgroundColor = .white;
         view.addSubview(scroll);
+        view.addSubview(chartContainer);
         scroll.delegate = self;
         scroll.addSubview(stack);
+        
+        chartContainer.translatesAutoresizingMaskIntoConstraints = false;
+        chartContainer.topAnchor.constraint(equalTo: view.topAnchor, constant: 200).isActive = true;
+        chartContainer.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true;
+        chartContainer.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -40).isActive = true;
+        chartContainer.heightAnchor.constraint(equalToConstant: 200).isActive = true;
+        chartContainer.backgroundColor = .white;
+        chartContainer.layer.cornerRadius = 20;
+        chartContainer.addSubview(labelStack);
+        
+        labelStack.axis = .vertical;
+        labelStack.translatesAutoresizingMaskIntoConstraints = false;
+        
+        for label in labels {
+            let stackLabel = ChartLabels(color: label.color, label: label.label);
+            labelStack.addArrangedSubview(stackLabel);
+        }
     }
 }
 
@@ -179,6 +181,80 @@ class StackView: UIStackView {
             addArrangedSubview(label);
             label.widthAnchor.constraint(equalToConstant: 100).isActive = true
         }
+    }
+}
+
+class Circle: UIView {
+    private var fillColor: UIColor = UIColor();
+    
+    required init(color: UIColor) {
+        fillColor = color;
+        super.init(frame: .zero)
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder);
+    }
+    
+    override func draw(_ rect: CGRect) {
+        var path = UIBezierPath()
+        path = UIBezierPath(ovalIn: CGRect(origin: CGPoint(), size: CGSize(width: 10, height: 10)));
+        fillColor.setFill()
+        path.lineWidth = 5
+        path.fill()
+    }
+}
+
+class ChartLabels: UIStackView {
+    private var parent: UIView = UIView();
+    private var fillColor = UIColor();
+    private var chartLabel = "";
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+    }
+    
+    required init(coder: NSCoder) {
+        super.init(coder: coder);
+    }
+    
+    required init(color: UIColor, label: String) {
+        super.init(frame: .zero);
+        fillColor = color;
+        chartLabel = label;
+    }
+    
+    override func didMoveToSuperview() {
+        parent = self.superview!;
+        initialise();
+    }
+        
+    private func initialise() -> Void {
+        let circle = Circle(color: fillColor);
+        let label = UILabel();
+        
+        axis = .horizontal;
+        addArrangedSubview(circle);
+        addArrangedSubview(label);
+        translatesAutoresizingMaskIntoConstraints = false;
+        leadingAnchor.constraint(equalTo: parent.leadingAnchor, constant: 120).isActive = true;
+        widthAnchor.constraint(equalToConstant: 120).isActive = true;
+        heightAnchor.constraint(equalToConstant: 30).isActive = true;
+//        layoutMargins = UIEdgeInsets(top: 0, left: 0, bottom: 15, right: 0);
+        isLayoutMarginsRelativeArrangement = true;
+        directionalLayoutMargins = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 16, trailing: 0)
+        backgroundColor = .brown;
+        
+        circle.backgroundColor = .clear;
+        circle.translatesAutoresizingMaskIntoConstraints = false;
+        circle.topAnchor.constraint(equalTo: topAnchor, constant: 5).isActive = true;
+        circle.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10).isActive = true;
+        
+        label.text = chartLabel;
+        label.textColor = .black;
+        label.translatesAutoresizingMaskIntoConstraints = false;
+        label.topAnchor.constraint(equalTo: topAnchor, constant: 0).isActive = true;
+        label.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 30).isActive = true;
     }
 }
 
