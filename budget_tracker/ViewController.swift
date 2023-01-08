@@ -6,6 +6,13 @@ struct ChartLabelwithColor {
     let color: UIColor;
 }
 
+struct TransactionDetails {
+    let category: String;
+    let count: Int;
+    let amount: Int;
+    let color: UIColor;
+}
+
 struct Segment {
     // the color of a given segment
     var color: UIColor
@@ -74,7 +81,8 @@ class ViewController: UIViewController, UIScrollViewDelegate {
     let scroll = ScrollView();
     let stack = StackView();
     let chartContainer = UIView();
-    let transaction = TransactionBox();
+    let transactionStack = UIStackView();
+    let transactionScroll = UIScrollView();
     
     override func viewDidLoad() {
         let labelStack = UIStackView();
@@ -84,14 +92,44 @@ class ViewController: UIViewController, UIScrollViewDelegate {
             .init(label: "Restarunt", color: .orange),
             .init(label: "Cloth", color: .purple),
             .init(label: "Fuel", color: .green)
-        ]
+        ];
+        let transactions: [TransactionDetails] = [
+            .init(category: "Salary", count: 1, amount: 5000, color: .blue),
+            .init(category: "Medicine", count: 2, amount: 2680, color: .red),
+            .init(category: "Restaurant", count: 2, amount: 2680, color: .orange),
+            .init(category: "Cloth", count: 5, amount: 2680, color: .purple),
+            .init(category: "Fuel", count: 6, amount: 3456, color: .green),
+        ];
+        
         super.viewDidLoad();
-        view.backgroundColor = .white;
+        view.backgroundColor = .LightWhite;
         view.addSubview(scroll);
+        view.addSubview(transactionScroll);
         view.addSubview(chartContainer);
-        view.addSubview(transaction);
+//        view.addSubview(transactionStack);
         scroll.delegate = self;
         scroll.addSubview(stack);
+        
+        transactionScroll.delegate = self;
+        transactionScroll.addSubview(transactionStack);
+        transactionScroll.contentSize = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+        transactionScroll.translatesAutoresizingMaskIntoConstraints = false;
+        transactionScroll.backgroundColor = .yellow;
+        transactionScroll.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 450).isActive = true
+        transactionScroll.leftAnchor.constraint(equalTo: self.view.leftAnchor).isActive = true
+        transactionScroll.rightAnchor.constraint(equalTo: self.view.rightAnchor).isActive = true
+        transactionScroll.heightAnchor.constraint(equalToConstant: 400).isActive = true;
+        
+//        transactionStack.backgroundColor = .orange
+        transactionStack.layer.borderColor = UIColor.red.cgColor;
+        transactionStack.layer.borderWidth = 1;
+        transactionStack.axis = .vertical;
+        transactionStack.alignment = .fill;
+        transactionStack.translatesAutoresizingMaskIntoConstraints = false;
+        transactionStack.topAnchor.constraint(equalTo: transactionScroll.topAnchor).isActive = true;
+        transactionStack.heightAnchor.constraint(equalTo: self.view.heightAnchor, constant: -20).isActive = true;
+        transactionStack.spacing = 30;
+        transactionStack.distribution = .fill
         
         chartContainer.translatesAutoresizingMaskIntoConstraints = false;
         chartContainer.topAnchor.constraint(equalTo: view.topAnchor, constant: 200).isActive = true;
@@ -111,6 +149,11 @@ class ViewController: UIViewController, UIScrollViewDelegate {
         for label in labels {
             let stackLabel = ChartLabels(color: label.color, label: label.label);
             labelStack.addArrangedSubview(stackLabel);
+        }
+        
+        for transaction in transactions {
+            let t = TransactionBox(transaction: transaction);
+            transactionStack.addArrangedSubview(t);
         }
     }
 }
@@ -264,6 +307,7 @@ class ChartLabels: UIStackView {
 
 class TransactionBox: UIStackView {
     private var parent: UIView = UIView();
+    var transactionDetails: TransactionDetails = .init(category: "", count: 0, amount: 0, color: .green);
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -273,8 +317,9 @@ class TransactionBox: UIStackView {
         super.init(coder: coder);
     }
     
-    required init() {
+    required init(transaction: TransactionDetails) {
         super.init(frame: .zero);
+        transactionDetails = transaction;
     }
     
     override func didMoveToSuperview() {
@@ -294,7 +339,6 @@ class TransactionBox: UIStackView {
         translatesAutoresizingMaskIntoConstraints = false;
         widthAnchor.constraint(equalTo: parent.widthAnchor, constant: -40).isActive = true;
         heightAnchor.constraint(equalToConstant: 100).isActive = true;
-        topAnchor.constraint(equalTo: parent.topAnchor, constant: 450).isActive = true;
         leadingAnchor.constraint(equalTo: parent.leadingAnchor, constant: 20).isActive = true;
         
         imageView();
@@ -309,10 +353,11 @@ class TransactionBox: UIStackView {
         addArrangedSubview(imageContainerView);
         
         imageContainerView.addSubview(imageView);
-        imageContainerView.backgroundColor = .red;
+        imageContainerView.backgroundColor = transactionDetails.color;
         imageContainerView.translatesAutoresizingMaskIntoConstraints = false;
         imageContainerView.widthAnchor.constraint(equalTo: widthAnchor, constant: -305).isActive = true;
         imageContainerView.heightAnchor.constraint(equalTo: heightAnchor, constant: -30).isActive = true;
+        imageContainerView.heightAnchor.constraint(equalToConstant: 100).isActive = true;
         imageContainerView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10).isActive = true;
         imageContainerView.topAnchor.constraint(equalTo: topAnchor, constant: 12).isActive = true;
         imageContainerView.layer.cornerRadius = 30;
@@ -335,13 +380,13 @@ class TransactionBox: UIStackView {
         labelContainer.addSubview(categoryLabel);
         labelContainer.addSubview(countLabel);
         
-        categoryLabel.text = "Medicines";
+        categoryLabel.text = transactionDetails.category;
         categoryLabel.font = UIFont.systemFont(ofSize: 17, weight: .bold)
         categoryLabel.translatesAutoresizingMaskIntoConstraints = false;
         categoryLabel.topAnchor.constraint(equalTo: labelContainer.topAnchor, constant: 0).isActive = true;
         
-        countLabel.text = "2 Transactions";
-        countLabel.textColor = .gray
+        countLabel.text = "\(transactionDetails.count) Transactions";
+        countLabel.textColor = .gray;
         countLabel.translatesAutoresizingMaskIntoConstraints = false;
         countLabel.topAnchor.constraint(equalTo: labelContainer.topAnchor, constant: 25).isActive = true;
         
@@ -361,7 +406,7 @@ class TransactionBox: UIStackView {
         amountView.topAnchor.constraint(equalTo: topAnchor, constant: 18).isActive = true;
         amountView.addSubview(amount);
         
-        amount.text = "$5,000";
+        amount.text = "$\(transactionDetails.amount)";
         amount.font = UIFont.systemFont(ofSize: 17, weight: .bold)
         amount.translatesAutoresizingMaskIntoConstraints = false;
         amount.topAnchor.constraint(equalTo: amountView.topAnchor, constant: 20).isActive = true;
