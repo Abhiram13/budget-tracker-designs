@@ -106,7 +106,6 @@ class ViewController: UIViewController, UIScrollViewDelegate {
         view.addSubview(scroll);
         view.addSubview(transactionScroll);
         view.addSubview(chartContainer);
-//        view.addSubview(transactionStack);
         scroll.delegate = self;
         scroll.addSubview(stack);
         
@@ -120,16 +119,14 @@ class ViewController: UIViewController, UIScrollViewDelegate {
         transactionScroll.rightAnchor.constraint(equalTo: self.view.rightAnchor).isActive = true
         transactionScroll.heightAnchor.constraint(equalToConstant: 400).isActive = true;
         
-//        transactionStack.backgroundColor = .orange
         transactionStack.layer.borderColor = UIColor.red.cgColor;
         transactionStack.layer.borderWidth = 1;
         transactionStack.axis = .vertical;
         transactionStack.alignment = .fill;
         transactionStack.translatesAutoresizingMaskIntoConstraints = false;
         transactionStack.topAnchor.constraint(equalTo: transactionScroll.topAnchor).isActive = true;
-        transactionStack.heightAnchor.constraint(equalTo: self.view.heightAnchor, constant: -20).isActive = true;
-        transactionStack.spacing = 30;
-        transactionStack.distribution = .fill
+        transactionStack.widthAnchor.constraint(equalTo: transactionScroll.widthAnchor).isActive = true;
+        transactionStack.spacing = 2;
         
         chartContainer.translatesAutoresizingMaskIntoConstraints = false;
         chartContainer.topAnchor.constraint(equalTo: view.topAnchor, constant: 200).isActive = true;
