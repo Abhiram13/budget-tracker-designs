@@ -74,6 +74,7 @@ class ViewController: UIViewController, UIScrollViewDelegate {
     let scroll = ScrollView();
     let stack = StackView();
     let chartContainer = UIView();
+    let transaction = TransactionBox();
     
     override func viewDidLoad() {
         let labelStack = UIStackView();
@@ -88,6 +89,7 @@ class ViewController: UIViewController, UIScrollViewDelegate {
         view.backgroundColor = .white;
         view.addSubview(scroll);
         view.addSubview(chartContainer);
+        view.addSubview(transaction);
         scroll.delegate = self;
         scroll.addSubview(stack);
         
@@ -96,12 +98,15 @@ class ViewController: UIViewController, UIScrollViewDelegate {
         chartContainer.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true;
         chartContainer.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -40).isActive = true;
         chartContainer.heightAnchor.constraint(equalToConstant: 200).isActive = true;
-        chartContainer.backgroundColor = .white;
+        chartContainer.backgroundColor = .green;
         chartContainer.layer.cornerRadius = 20;
         chartContainer.addSubview(labelStack);
         
         labelStack.axis = .vertical;
         labelStack.translatesAutoresizingMaskIntoConstraints = false;
+        labelStack.alignment = .fill;
+        labelStack.heightAnchor.constraint(equalTo: chartContainer.heightAnchor, constant: -10).isActive = true;
+        labelStack.spacing = 10;
         
         for label in labels {
             let stackLabel = ChartLabels(color: label.color, label: label.label);
@@ -135,11 +140,11 @@ class ScrollView: UIScrollView {
         contentSize = CGSize(width: 100, height: 100)
         addSubview(stack);
         translatesAutoresizingMaskIntoConstraints = false;
-        backgroundColor = .blue;
+        backgroundColor = .yellow;
         topAnchor.constraint(equalTo: parent.topAnchor).isActive = true
         leftAnchor.constraint(equalTo: parent.leftAnchor).isActive = true
         rightAnchor.constraint(equalTo: parent.rightAnchor).isActive = true
-        bottomAnchor.constraint(equalTo: parent.bottomAnchor, constant: -200).isActive = true
+        heightAnchor.constraint(equalToConstant: 100).isActive = true;
     }
 }
 
@@ -228,7 +233,7 @@ class ChartLabels: UIStackView {
         parent = self.superview!;
         initialise();
     }
-        
+    
     private func initialise() -> Void {
         let circle = Circle(color: fillColor);
         let label = UILabel();
@@ -240,14 +245,13 @@ class ChartLabels: UIStackView {
         leadingAnchor.constraint(equalTo: parent.leadingAnchor, constant: 120).isActive = true;
         widthAnchor.constraint(equalToConstant: 120).isActive = true;
         heightAnchor.constraint(equalToConstant: 30).isActive = true;
-//        layoutMargins = UIEdgeInsets(top: 0, left: 0, bottom: 15, right: 0);
-        isLayoutMarginsRelativeArrangement = true;
-        directionalLayoutMargins = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 16, trailing: 0)
         backgroundColor = .brown;
+        layer.borderWidth = 1;
+        layer.borderColor = UIColor.black.cgColor;
         
         circle.backgroundColor = .clear;
         circle.translatesAutoresizingMaskIntoConstraints = false;
-        circle.topAnchor.constraint(equalTo: topAnchor, constant: 5).isActive = true;
+        circle.topAnchor.constraint(equalTo: topAnchor, constant: 10).isActive = true;
         circle.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10).isActive = true;
         
         label.text = chartLabel;
@@ -255,6 +259,112 @@ class ChartLabels: UIStackView {
         label.translatesAutoresizingMaskIntoConstraints = false;
         label.topAnchor.constraint(equalTo: topAnchor, constant: 0).isActive = true;
         label.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 30).isActive = true;
+    }
+}
+
+class TransactionBox: UIStackView {
+    private var parent: UIView = UIView();
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+    }
+    
+    required init(coder: NSCoder) {
+        super.init(coder: coder);
+    }
+    
+    required init() {
+        super.init(frame: .zero);
+    }
+    
+    override func didMoveToSuperview() {
+        parent = self.superview!;
+        self.initlize();
+    }
+    
+    private func initlize() {
+        container();
+    }
+    
+    private func container() -> Void {
+        layer.borderColor = UIColor.black.cgColor;
+        layer.borderWidth = 2;
+        axis = .horizontal;
+        alignment = .fill
+        translatesAutoresizingMaskIntoConstraints = false;
+        widthAnchor.constraint(equalTo: parent.widthAnchor, constant: -40).isActive = true;
+        heightAnchor.constraint(equalToConstant: 100).isActive = true;
+        topAnchor.constraint(equalTo: parent.topAnchor, constant: 450).isActive = true;
+        leadingAnchor.constraint(equalTo: parent.leadingAnchor, constant: 20).isActive = true;
+        
+        imageView();
+    }
+    
+    private func imageView() -> Void {
+        let imageContainerView = UIView();
+        let pillImage = UIImage(named: "pill");
+        let imageView = UIImageView(image: pillImage);
+        imageView.frame = CGRect(x: 20, y: 20, width: 30, height: 30);
+        
+        addArrangedSubview(imageContainerView);
+        
+        imageContainerView.addSubview(imageView);
+        imageContainerView.backgroundColor = .red;
+        imageContainerView.translatesAutoresizingMaskIntoConstraints = false;
+        imageContainerView.widthAnchor.constraint(equalTo: widthAnchor, constant: -305).isActive = true;
+        imageContainerView.heightAnchor.constraint(equalTo: heightAnchor, constant: -30).isActive = true;
+        imageContainerView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10).isActive = true;
+        imageContainerView.topAnchor.constraint(equalTo: topAnchor, constant: 12).isActive = true;
+        imageContainerView.layer.cornerRadius = 30;
+        
+        transactionLabels();
+    }
+    
+    private func transactionLabels() -> Void {
+        let labelContainer = UIView();
+        let categoryLabel = UILabel();
+        let countLabel = UILabel();
+        
+        addArrangedSubview(labelContainer);
+        
+        labelContainer.translatesAutoresizingMaskIntoConstraints = false;
+        labelContainer.widthAnchor.constraint(equalTo: widthAnchor, constant: -190).isActive = true;
+        labelContainer.heightAnchor.constraint(equalTo: heightAnchor, constant: -45).isActive = true;
+        labelContainer.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 95).isActive = true;
+        labelContainer.topAnchor.constraint(equalTo: topAnchor, constant: 25).isActive = true;
+        labelContainer.addSubview(categoryLabel);
+        labelContainer.addSubview(countLabel);
+        
+        categoryLabel.text = "Medicines";
+        categoryLabel.font = UIFont.systemFont(ofSize: 17, weight: .bold)
+        categoryLabel.translatesAutoresizingMaskIntoConstraints = false;
+        categoryLabel.topAnchor.constraint(equalTo: labelContainer.topAnchor, constant: 0).isActive = true;
+        
+        countLabel.text = "2 Transactions";
+        countLabel.textColor = .gray
+        countLabel.translatesAutoresizingMaskIntoConstraints = false;
+        countLabel.topAnchor.constraint(equalTo: labelContainer.topAnchor, constant: 25).isActive = true;
+        
+        amountLabel();
+    }
+    
+    private func amountLabel() -> Void {
+        let amountView = UIView();
+        let amount = UILabel();
+        
+        addArrangedSubview(amountView);
+        
+        amountView.translatesAutoresizingMaskIntoConstraints = false;
+        amountView.widthAnchor.constraint(equalTo: widthAnchor, constant: -300).isActive = true;
+        amountView.heightAnchor.constraint(equalTo: heightAnchor, constant: -40).isActive = true;
+        amountView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 290).isActive = true;
+        amountView.topAnchor.constraint(equalTo: topAnchor, constant: 18).isActive = true;
+        amountView.addSubview(amount);
+        
+        amount.text = "$5,000";
+        amount.font = UIFont.systemFont(ofSize: 17, weight: .bold)
+        amount.translatesAutoresizingMaskIntoConstraints = false;
+        amount.topAnchor.constraint(equalTo: amountView.topAnchor, constant: 20).isActive = true;
     }
 }
 
