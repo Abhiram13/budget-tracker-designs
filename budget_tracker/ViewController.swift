@@ -128,6 +128,8 @@ class ViewController: UIViewController, UIScrollViewDelegate {
         transactionScroll.leftAnchor.constraint(equalTo: self.view.leftAnchor).isActive = true
         transactionScroll.rightAnchor.constraint(equalTo: self.view.rightAnchor).isActive = true
         transactionScroll.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height - 50).isActive = true;
+        transactionScroll.showsVerticalScrollIndicator = false;
+        transactionScroll.showsHorizontalScrollIndicator = false;
         
         transactionStack.axis = .vertical;
         transactionStack.alignment = .fill;
@@ -207,6 +209,8 @@ class ScrollView: UIScrollView {
         leftAnchor.constraint(equalTo: parent.leftAnchor).isActive = true
         rightAnchor.constraint(equalTo: parent.rightAnchor).isActive = true
         heightAnchor.constraint(equalToConstant: 100).isActive = true;
+        showsVerticalScrollIndicator = false;
+        showsHorizontalScrollIndicator = false;
     }
 }
 
@@ -230,7 +234,7 @@ class StackView: UIStackView {
         self.initalise();
     }
     
-    private func initalise() -> Void {        
+    private func initalise() -> Void {
         translatesAutoresizingMaskIntoConstraints = false;
         isLayoutMarginsRelativeArrangement = true;
         topAnchor.constraint(equalTo: parent.topAnchor).isActive = true
@@ -426,6 +430,7 @@ class TransactionBox: UIStackView {
         amount.font = UIFont.systemFont(ofSize: 17, weight: .medium)
         amount.translatesAutoresizingMaskIntoConstraints = false;
         amount.topAnchor.constraint(equalTo: amountView.topAnchor, constant: 20).isActive = true;
+        amount.trailingAnchor.constraint(equalTo: amountView.trailingAnchor).isActive = true;
     }
 }
 
