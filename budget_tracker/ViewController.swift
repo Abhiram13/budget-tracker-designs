@@ -87,28 +87,28 @@ class ViewController: UIViewController, UIScrollViewDelegate {
     override func viewDidLoad() {
         let labelStack = UIStackView();
         let labels: [ChartLabelwithColor] = [
-            .init(label: "Salary", color: .blue),
+            .init(label: "Salary", color: .ThemeBlue),
             .init(label: "Medicine", color: .red),
             .init(label: "Restarunt", color: .orange),
-            .init(label: "Cloth", color: .purple),
-            .init(label: "Fuel", color: .green)
+            .init(label: "Cloth", color: .ThemePurple),
+            .init(label: "Fuel", color: .ThemeGreen)
         ];
         let transactions: [TransactionDetails] = [
-            .init(category: "Salary", count: 1, amount: 5000, color: .blue),
+            .init(category: "Salary", count: 1, amount: 5000, color: .ThemeBlue),
             .init(category: "Medicine", count: 2, amount: 2680, color: .red),
             .init(category: "Restaurant", count: 2, amount: 2680, color: .orange),
-            .init(category: "Cloth", count: 5, amount: 2680, color: .purple),
-            .init(category: "Fuel", count: 6, amount: 3456, color: .green),
-            .init(category: "Salary", count: 1, amount: 5000, color: .blue),
+            .init(category: "Cloth", count: 5, amount: 2680, color: .ThemePurple),
+            .init(category: "Fuel", count: 6, amount: 3456, color: .ThemeGreen),
+            .init(category: "Salary", count: 1, amount: 5000, color: .ThemeBlue),
             .init(category: "Medicine", count: 2, amount: 2680, color: .red),
             .init(category: "Restaurant", count: 2, amount: 2680, color: .orange),
-            .init(category: "Cloth", count: 5, amount: 2680, color: .purple),
-            .init(category: "Fuel", count: 6, amount: 3456, color: .green),
-            .init(category: "Salary", count: 1, amount: 5000, color: .blue),
+            .init(category: "Cloth", count: 5, amount: 2680, color: .ThemePurple),
+            .init(category: "Fuel", count: 6, amount: 3456, color: .ThemeGreen),
+            .init(category: "Salary", count: 1, amount: 5000, color: .ThemeBlue),
             .init(category: "Medicine", count: 2, amount: 2680, color: .red),
             .init(category: "Restaurant", count: 2, amount: 2680, color: .orange),
-            .init(category: "Cloth", count: 5, amount: 2680, color: .purple),
-            .init(category: "Fuel", count: 6, amount: 3456, color: .green),
+            .init(category: "Cloth", count: 5, amount: 2680, color: .ThemePurple),
+            .init(category: "Fuel", count: 6, amount: 3456, color: .ThemeGreen),
         ];
         
         super.viewDidLoad();
@@ -124,14 +124,11 @@ class ViewController: UIViewController, UIScrollViewDelegate {
         transactionScroll.addSubview(transactionStack);
         transactionScroll.contentSize = CGSize(width: UIScreen.main.bounds.width, height: 2000)
         transactionScroll.translatesAutoresizingMaskIntoConstraints = false;
-        transactionScroll.backgroundColor = .yellow;
         transactionScroll.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 100).isActive = true
         transactionScroll.leftAnchor.constraint(equalTo: self.view.leftAnchor).isActive = true
         transactionScroll.rightAnchor.constraint(equalTo: self.view.rightAnchor).isActive = true
         transactionScroll.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height - 50).isActive = true;
         
-        transactionStack.layer.borderColor = UIColor.red.cgColor;
-        transactionStack.layer.borderWidth = 1;
         transactionStack.axis = .vertical;
         transactionStack.alignment = .fill;
         transactionStack.translatesAutoresizingMaskIntoConstraints = false;
@@ -143,15 +140,21 @@ class ViewController: UIViewController, UIScrollViewDelegate {
         chartContainer.topAnchor.constraint(equalTo: transactionScroll.topAnchor, constant: 20).isActive = true;
         chartContainer.leadingAnchor.constraint(equalTo: transactionScroll.leadingAnchor, constant: 20).isActive = true;
         chartContainer.widthAnchor.constraint(equalTo: transactionScroll.widthAnchor, constant: -40).isActive = true;
-        chartContainer.backgroundColor = .green;
+        chartContainer.backgroundColor = .white;
+        chartContainer.layer.shadowColor = UIColor.gray.cgColor;
+        chartContainer.layer.shadowOpacity = 0.5
+        chartContainer.layer.shadowOffset = CGSize(width: -1, height: 1)
+        chartContainer.layer.shadowRadius = 5
         chartContainer.layer.cornerRadius = 20;
         chartContainer.addSubview(labelStack);
         
         labelStack.axis = .vertical;
         labelStack.translatesAutoresizingMaskIntoConstraints = false;
         labelStack.alignment = .fill;
-        labelStack.heightAnchor.constraint(equalTo: chartContainer.heightAnchor, constant: -10).isActive = true;
-        labelStack.spacing = 10;
+        labelStack.heightAnchor.constraint(equalTo: chartContainer.heightAnchor, constant: -20).isActive = true;
+        labelStack.leadingAnchor.constraint(equalTo: chartContainer.leadingAnchor, constant: 100).isActive = true;
+        labelStack.topAnchor.constraint(equalTo: chartContainer.topAnchor, constant: 10).isActive = true;
+//        labelStack.spacing = 1;
         
         for label in labels {
             let stackLabel = ChartLabels(color: label.color, label: label.label);
@@ -295,9 +298,9 @@ class ChartLabels: UIStackView {
         leadingAnchor.constraint(equalTo: parent.leadingAnchor, constant: 120).isActive = true;
         widthAnchor.constraint(equalToConstant: 120).isActive = true;
         heightAnchor.constraint(equalToConstant: 30).isActive = true;
-        backgroundColor = .brown;
-        layer.borderWidth = 1;
-        layer.borderColor = UIColor.black.cgColor;
+//        backgroundColor = .brown;
+//        layer.borderWidth = 1;
+//        layer.borderColor = UIColor.black.cgColor;
         
         circle.backgroundColor = .clear;
         circle.translatesAutoresizingMaskIntoConstraints = false;
@@ -339,8 +342,6 @@ class TransactionBox: UIStackView {
     }
     
     private func container() -> Void {
-        layer.borderColor = UIColor.black.cgColor;
-        layer.borderWidth = 2;
         axis = .horizontal;
         alignment = .fill
         translatesAutoresizingMaskIntoConstraints = false;
@@ -388,7 +389,7 @@ class TransactionBox: UIStackView {
         labelContainer.addSubview(countLabel);
         
         categoryLabel.text = transactionDetails.category;
-        categoryLabel.font = UIFont.systemFont(ofSize: 17, weight: .bold)
+        categoryLabel.font = UIFont.systemFont(ofSize: 17, weight: .medium)
         categoryLabel.translatesAutoresizingMaskIntoConstraints = false;
         categoryLabel.topAnchor.constraint(equalTo: labelContainer.topAnchor, constant: 0).isActive = true;
         
@@ -414,7 +415,7 @@ class TransactionBox: UIStackView {
         amountView.addSubview(amount);
         
         amount.text = "$\(transactionDetails.amount)";
-        amount.font = UIFont.systemFont(ofSize: 17, weight: .bold)
+        amount.font = UIFont.systemFont(ofSize: 17, weight: .medium)
         amount.translatesAutoresizingMaskIntoConstraints = false;
         amount.topAnchor.constraint(equalTo: amountView.topAnchor, constant: 20).isActive = true;
     }
