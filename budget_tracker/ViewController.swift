@@ -190,10 +190,19 @@ class ScrollView: UIScrollView {
     
     private func initlize() -> Void {
         let stack = StackView();
+        
+        // gradient not working here
+        let gradient = CAGradientLayer()
+        gradient.colors = [UIColor.ThemePurple.cgColor, UIColor.ThemeBlue.cgColor];
+        gradient.startPoint = CGPoint(x: 0, y: 0)
+        gradient.endPoint = CGPoint(x: 1, y: 1)
+        gradient.frame = self.bounds
+        layer.insertSublayer(gradient, at: 0)
+        
         contentSize = CGSize(width: 100, height: 100)
         addSubview(stack);
         translatesAutoresizingMaskIntoConstraints = false;
-        backgroundColor = .yellow;
+        backgroundColor = .ThemePurple;
         topAnchor.constraint(equalTo: parent.topAnchor).isActive = true
         leftAnchor.constraint(equalTo: parent.leftAnchor).isActive = true
         rightAnchor.constraint(equalTo: parent.rightAnchor).isActive = true
@@ -221,7 +230,7 @@ class StackView: UIStackView {
         self.initalise();
     }
     
-    private func initalise() -> Void {
+    private func initalise() -> Void {        
         translatesAutoresizingMaskIntoConstraints = false;
         isLayoutMarginsRelativeArrangement = true;
         topAnchor.constraint(equalTo: parent.topAnchor).isActive = true
@@ -229,13 +238,12 @@ class StackView: UIStackView {
         rightAnchor.constraint(equalTo: parent.rightAnchor).isActive = true
         bottomAnchor.constraint(equalTo: parent.bottomAnchor).isActive = true
         heightAnchor.constraint(equalToConstant: 100).isActive = true
-        backgroundColor = .green;
         axis = .horizontal;
         
-        for i in 1...10 {
+        for month in DateFormatter().monthSymbols {
             let label = UILabel();
-            label.text = "Hello \(i)";
-            label.textColor = .black;
+            label.text = month;
+            label.textColor = .white;
             addArrangedSubview(label);
             label.widthAnchor.constraint(equalToConstant: 100).isActive = true
         }
