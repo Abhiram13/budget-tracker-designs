@@ -99,40 +99,50 @@ class ViewController: UIViewController, UIScrollViewDelegate {
             .init(category: "Restaurant", count: 2, amount: 2680, color: .orange),
             .init(category: "Cloth", count: 5, amount: 2680, color: .purple),
             .init(category: "Fuel", count: 6, amount: 3456, color: .green),
+            .init(category: "Salary", count: 1, amount: 5000, color: .blue),
+            .init(category: "Medicine", count: 2, amount: 2680, color: .red),
+            .init(category: "Restaurant", count: 2, amount: 2680, color: .orange),
+            .init(category: "Cloth", count: 5, amount: 2680, color: .purple),
+            .init(category: "Fuel", count: 6, amount: 3456, color: .green),
+            .init(category: "Salary", count: 1, amount: 5000, color: .blue),
+            .init(category: "Medicine", count: 2, amount: 2680, color: .red),
+            .init(category: "Restaurant", count: 2, amount: 2680, color: .orange),
+            .init(category: "Cloth", count: 5, amount: 2680, color: .purple),
+            .init(category: "Fuel", count: 6, amount: 3456, color: .green),
         ];
         
         super.viewDidLoad();
         view.backgroundColor = .LightWhite;
         view.addSubview(scroll);
         view.addSubview(transactionScroll);
-        view.addSubview(chartContainer);
+        
         scroll.delegate = self;
         scroll.addSubview(stack);
         
         transactionScroll.delegate = self;
+        transactionScroll.addSubview(chartContainer)
         transactionScroll.addSubview(transactionStack);
-        transactionScroll.contentSize = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+        transactionScroll.contentSize = CGSize(width: UIScreen.main.bounds.width, height: 2000)
         transactionScroll.translatesAutoresizingMaskIntoConstraints = false;
         transactionScroll.backgroundColor = .yellow;
-        transactionScroll.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 450).isActive = true
+        transactionScroll.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 100).isActive = true
         transactionScroll.leftAnchor.constraint(equalTo: self.view.leftAnchor).isActive = true
         transactionScroll.rightAnchor.constraint(equalTo: self.view.rightAnchor).isActive = true
-        transactionScroll.heightAnchor.constraint(equalToConstant: 400).isActive = true;
+        transactionScroll.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height - 50).isActive = true;
         
         transactionStack.layer.borderColor = UIColor.red.cgColor;
         transactionStack.layer.borderWidth = 1;
         transactionStack.axis = .vertical;
         transactionStack.alignment = .fill;
         transactionStack.translatesAutoresizingMaskIntoConstraints = false;
-        transactionStack.topAnchor.constraint(equalTo: transactionScroll.topAnchor).isActive = true;
+        transactionStack.topAnchor.constraint(equalTo: transactionScroll.topAnchor, constant: 240).isActive = true;
         transactionStack.widthAnchor.constraint(equalTo: transactionScroll.widthAnchor).isActive = true;
         transactionStack.spacing = 2;
         
         chartContainer.translatesAutoresizingMaskIntoConstraints = false;
-        chartContainer.topAnchor.constraint(equalTo: view.topAnchor, constant: 200).isActive = true;
-        chartContainer.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true;
-        chartContainer.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -40).isActive = true;
-        chartContainer.heightAnchor.constraint(equalToConstant: 200).isActive = true;
+        chartContainer.topAnchor.constraint(equalTo: transactionScroll.topAnchor, constant: 20).isActive = true;
+        chartContainer.leadingAnchor.constraint(equalTo: transactionScroll.leadingAnchor, constant: 20).isActive = true;
+        chartContainer.widthAnchor.constraint(equalTo: transactionScroll.widthAnchor, constant: -40).isActive = true;
         chartContainer.backgroundColor = .green;
         chartContainer.layer.cornerRadius = 20;
         chartContainer.addSubview(labelStack);
