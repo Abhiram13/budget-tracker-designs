@@ -134,7 +134,7 @@ class ViewController: UIViewController, UIScrollViewDelegate {
         transactionStack.axis = .vertical;
         transactionStack.alignment = .fill;
         transactionStack.translatesAutoresizingMaskIntoConstraints = false;
-        transactionStack.topAnchor.constraint(equalTo: transactionScroll.topAnchor, constant: 240).isActive = true;
+        transactionStack.topAnchor.constraint(equalTo: chartContainer.bottomAnchor, constant: 40).isActive = true;
         transactionStack.widthAnchor.constraint(equalTo: transactionScroll.widthAnchor).isActive = true;
         transactionStack.spacing = 2;
         
@@ -156,7 +156,6 @@ class ViewController: UIViewController, UIScrollViewDelegate {
         labelStack.heightAnchor.constraint(equalTo: chartContainer.heightAnchor, constant: -20).isActive = true;
         labelStack.leadingAnchor.constraint(equalTo: chartContainer.leadingAnchor, constant: 100).isActive = true;
         labelStack.topAnchor.constraint(equalTo: chartContainer.topAnchor, constant: 10).isActive = true;
-//        labelStack.spacing = 1;
         
         for label in labels {
             let stackLabel = ChartLabels(color: label.color, label: label.label);
