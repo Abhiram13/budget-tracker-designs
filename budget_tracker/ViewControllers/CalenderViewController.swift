@@ -6,9 +6,15 @@ class CalenderViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad();
+        let navBar = self.navigationController?.navigationBar;
         view.addSubview(calendarView);
-        view.backgroundColor = .white;
+        view.backgroundColor = .green;
         self.initialize();
+        title = "Calender View"
+        navBar?.barTintColor = .blue
+        navBar?.topItem?.title = "Calender"
+        navBar?.heightAnchor.constraint(equalToConstant: 50).isActive = true;
+        navBar?.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width).isActive = true;
     }
     
     private func initialize() -> Void {
