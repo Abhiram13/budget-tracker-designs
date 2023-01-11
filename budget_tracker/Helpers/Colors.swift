@@ -17,4 +17,12 @@ extension UIColor {
     static var ThemePurple: UIColor {
         return UIColor(red: 160/255, green: 78/255, blue: 247/255, alpha: 1);
     }
+    
+    static var ThemeSkyBlue: UIColor {
+        return UIColor(red: 75/255, green: 190/255, blue: 248/255, alpha: 1);
+    }
+    
+    static var ThemeSkyPink: UIColor {
+        return UIColor(red: 238/255, green: 98/255, blue: 128/255, alpha: 1);
+    }
 }
