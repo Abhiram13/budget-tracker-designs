@@ -83,6 +83,7 @@ class ViewController: UIViewController, UIScrollViewDelegate {
     let chartContainer = UIView();
     let transactionStack = UIStackView();
     let transactionScroll = UIScrollView();
+    let addButton: UIButton = AddButton();
     
     override func viewDidLoad() {
         let labelStack = UIStackView();
@@ -115,6 +116,7 @@ class ViewController: UIViewController, UIScrollViewDelegate {
         view.backgroundColor = .LightWhite;
         view.addSubview(scroll);
         view.addSubview(transactionScroll);
+        view.addSubview(addButton);
         
         scroll.delegate = self;
         scroll.addSubview(stack);
@@ -433,3 +435,48 @@ class TransactionBox: UIStackView {
     }
 }
 
+class AddButton: UIButton {
+    private var parent: UIView = UIView();
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder);
+    }
+    
+    required init() {
+        super.init(frame: .zero);
+    }
+    
+    override func didMoveToSuperview() {
+        parent = self.superview!;
+        self.initialise();
+    }
+    
+    private func initialise() -> Void {
+        let plusIcon = UILabel();
+        addSubview(plusIcon);
+        
+        translatesAutoresizingMaskIntoConstraints = false;
+        backgroundColor = .blue;
+        layer.cornerRadius = 35;
+        widthAnchor.constraint(equalToConstant: 70).isActive = true;
+        heightAnchor.constraint(equalToConstant: 70).isActive = true;
+        bottomAnchor.constraint(equalTo: parent.bottomAnchor, constant: -100).isActive = true;
+        trailingAnchor.constraint(equalTo: parent.trailingAnchor, constant: -30).isActive = true;
+        layer.shadowColor = UIColor.gray.cgColor;
+        layer.shadowOpacity = 1
+        layer.shadowOffset = CGSize(width: -1, height: 3)
+        layer.shadowRadius = 5
+        
+        // plus label constraints
+        plusIcon.translatesAutoresizingMaskIntoConstraints = false;
+        plusIcon.font = .systemFont(ofSize: 40, weight: .medium);
+        plusIcon.text = "+";
+        plusIcon.textColor = .white;
+        plusIcon.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true;
+        plusIcon.centerYAnchor.constraint(equalTo: centerYAnchor, constant: -2).isActive = true;
+    }
+}
