@@ -2,36 +2,34 @@ import UIKit;
 import AVFoundation;
 
 class CalenderViewController: UIViewController {
-    let calendarView = UICalendarView();
-    
     override func viewDidLoad() {
         super.viewDidLoad();
-        let navBar = self.navigationController?.navigationBar;
-        view.addSubview(calendarView);
-        view.backgroundColor = .green;
-        self.initialize();
-        title = "Calender View"
-        navBar?.barTintColor = .blue
-        navBar?.topItem?.title = "Calender"
-        navBar?.heightAnchor.constraint(equalToConstant: 50).isActive = true;
-        navBar?.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width).isActive = true;
+        let navBar: UINavigationBar = (self.navigationController?.navigationBar)!;
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithOpaqueBackground()
+        appearance.backgroundColor = UIColor.blue;
+        appearance.largeTitleTextAttributes = [.foregroundColor: UIColor.black]; // for large title
+        appearance.titleTextAttributes = [.foregroundColor: UIColor.white]; // for small title
+        
+        view.backgroundColor = .white;
+        
+        navBar.barTintColor = .blue;
+        navBar.topItem?.title = "Calender";
+        navBar.prefersLargeTitles = true;
+        navBar.standardAppearance = appearance;
+        
+        initialize();
     }
     
     private func initialize() -> Void {
-        let gregorianCalendar = Calendar(identifier: .gregorian);
-        calendarView.calendar = gregorianCalendar;
-        calendarView.locale = Locale(identifier: "zh_TW");
-        calendarView.fontDesign = .rounded;
-        calendarView.visibleDateComponents = DateComponents(calendar: Calendar(identifier: .gregorian), year: 2022, month: 6, day: 6)
+        let scroller = UIScrollView();
+        view.addSubview(scroller);
         
-        let fromDateComponents = DateComponents(calendar: Calendar(identifier: .gregorian), year: 2022, month: 1, day: 1)
-        let toDateComponents = DateComponents(calendar: Calendar(identifier: .gregorian), year: 2022, month: 12, day: 31)
-        
-        guard let fromDate = fromDateComponents.date, let toDate = toDateComponents.date else {
-            return
-        }
-        
-        let calendarViewDateRange = DateInterval(start: fromDate, end: toDate)
-        calendarView.availableDateRange = calendarViewDateRange
+        scroller.contentSize = CGSize(width: UIScreen.main.bounds.width, height: 2000)
+        scroller.translatesAutoresizingMaskIntoConstraints = false;
+        scroller.topAnchor.constraint(equalTo: view.topAnchor).isActive = true;
+        scroller.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        scroller.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        scroller.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height - 50).isActive = true;
     }
 }
