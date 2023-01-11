@@ -248,7 +248,7 @@ class StackView: UIStackView {
             label.text = month;
             label.textColor = .white;
             addArrangedSubview(label);
-            label.widthAnchor.constraint(equalToConstant: 100).isActive = true
+            spacing = 30;
         }
     }
 }
@@ -407,7 +407,7 @@ class TransactionBox: UIStackView {
         countLabel.text = "\(transactionDetails.count) Transactions";
         countLabel.textColor = .gray;
         countLabel.translatesAutoresizingMaskIntoConstraints = false;
-        countLabel.topAnchor.constraint(equalTo: labelContainer.topAnchor, constant: 25).isActive = true;
+        countLabel.topAnchor.constraint(equalTo: categoryLabel.bottomAnchor, constant: 5).isActive = true;
         
         amountLabel();
     }
