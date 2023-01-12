@@ -311,9 +311,6 @@ class ChartLabels: UIStackView {
         leadingAnchor.constraint(equalTo: parent.leadingAnchor, constant: 120).isActive = true;
         widthAnchor.constraint(equalToConstant: 120).isActive = true;
         heightAnchor.constraint(equalToConstant: 30).isActive = true;
-//        backgroundColor = .brown;
-//        layer.borderWidth = 1;
-//        layer.borderColor = UIColor.black.cgColor;
         
         circle.backgroundColor = .clear;
         circle.translatesAutoresizingMaskIntoConstraints = false;

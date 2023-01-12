@@ -1,6 +1,10 @@
 import UIKit;
 import AVFoundation;
 
+extension UIScrollView {
+    
+}
+
 class CalenderViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad();
@@ -25,11 +29,25 @@ class CalenderViewController: UIViewController {
         let scroller = UIScrollView();
         let segment = SegmentView();
         let container = SavingsContainerView();
+        let topSpendingLabel = UILabel();
+        let category = CategoryBox(category: "Home", color: .red);
+        let category1 = CategoryBox(category: "Medicines", color: .green);
+        let category2 = CategoryBox(category: "JHGhjh", color: .blue);
+        let category3 = CategoryBox(category: "hjkk", color: .ThemePurple);
+        let category4 = CategoryBox(category: "hjkk", color: .ThemeSkyPink);
+        let category5 = CategoryBox(category: "hjkk", color: .ThemeSkyBlue);
+        let category6 = CategoryBox(category: "hjkk", color: .ThemeGreen);
+        let category7 = CategoryBox(category: "hjkk", color: .orange);
+        let category8 = CategoryBox(category: "hjkk", color: .purple);
+        let categoryScroll = UIScrollView();
+        let categoryStack = UIStackView();
         
         view.addSubview(scroller);
         
         scroller.addSubview(segment);
         scroller.addSubview(container);
+        scroller.addSubview(topSpendingLabel);
+        scroller.addSubview(categoryScroll);
         scroller.contentSize = CGSize(width: UIScreen.main.bounds.width, height: 2000)
         scroller.translatesAutoresizingMaskIntoConstraints = false;
         scroller.topAnchor.constraint(equalTo: view.topAnchor).isActive = true;
@@ -46,6 +64,43 @@ class CalenderViewController: UIViewController {
         container.topAnchor.constraint(equalTo: segment.bottomAnchor, constant: 20).isActive = true;
         container.heightAnchor.constraint(equalToConstant: 200).isActive = true;
         container.centerXAnchor.constraint(equalTo: scroller.centerXAnchor).isActive = true;
+        
+        topSpendingLabel.text = "Top Spending";
+        topSpendingLabel.font = .systemFont(ofSize: 25, weight: .semibold);
+        topSpendingLabel.translatesAutoresizingMaskIntoConstraints = false;
+        topSpendingLabel.leadingAnchor.constraint(equalTo: container.leadingAnchor).isActive = true;
+        topSpendingLabel.topAnchor.constraint(equalTo: container.bottomAnchor, constant: 20).isActive = true;
+        
+        categoryScroll.translatesAutoresizingMaskIntoConstraints = false;
+        categoryScroll.contentSize = CGSize(width: UIScreen.main.bounds.width + 400, height: 110)
+        categoryScroll.topAnchor.constraint(equalTo: topSpendingLabel.bottomAnchor, constant: 15).isActive = true;
+        categoryScroll.leftAnchor.constraint(equalTo: topSpendingLabel.leftAnchor).isActive = true
+        categoryScroll.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        categoryScroll.heightAnchor.constraint(equalToConstant: 110).isActive = true;
+        categoryScroll.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width).isActive = true;
+//        categoryScroll.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true;
+        categoryScroll.addSubview(categoryStack);
+        categoryScroll.showsVerticalScrollIndicator = false;
+        categoryScroll.showsHorizontalScrollIndicator = false;
+        
+        categoryStack.axis = .horizontal;
+        categoryStack.alignment = .fill;
+        categoryStack.spacing = 10;
+        categoryStack.translatesAutoresizingMaskIntoConstraints = false;
+//        categoryStack.leadingAnchor.constraint(equalTo: categoryScroll.leadingAnchor).isActive = true;
+        categoryStack.heightAnchor.constraint(equalToConstant: 110).isActive = true;
+        categoryStack.addArrangedSubview(category);
+        categoryStack.addArrangedSubview(category1);
+        categoryStack.addArrangedSubview(category2);
+        categoryStack.addArrangedSubview(category3);
+        categoryStack.addArrangedSubview(category4);
+//        categoryStack.addArrangedSubview(category5);
+//        categoryStack.addArrangedSubview(category6);
+//        categoryStack.addArrangedSubview(category7);
+//        categoryStack.addArrangedSubview(category8);
+        
+//        category.leadingAnchor.constraint(equalTo: topSpendingLabel.leadingAnchor).isActive = true;
+//        category.topAnchor.constraint(equalTo: topSpendingLabel.bottomAnchor, constant: 15).isActive = true;
     }
     
     private func SegmentView() -> UISegmentedControl {
@@ -63,8 +118,8 @@ class CalenderViewController: UIViewController {
         let container = UIView();
         let titleLabel = UILabel();
         let amountLabel = UILabel();
-        let bar = BarGraphView(amount: "$10,000.00", title: "Earned", width: -120, color: .ThemeSkyBlue);
-        let spentBar = BarGraphView(amount: "$10,000.00", title: "Spend", width: -160, color: .ThemeSkyPink);
+        let bar = BarGraphView(amount: "$10,000.00", title: "Earned", width: 0.6, color: .ThemeSkyBlue);
+        let spentBar = BarGraphView(amount: "$10,000.00", title: "Spend", width: 0.45, color: .ThemeSkyPink);
         
         container.addSubview(titleLabel);
         container.addSubview(amountLabel);
@@ -74,7 +129,7 @@ class CalenderViewController: UIViewController {
         container.backgroundColor = .white;
         container.layer.cornerRadius = 20;
         container.layer.shadowColor = UIColor.gray.cgColor;
-        container.layer.shadowOpacity = 0.5
+        container.layer.shadowOpacity = 0.1
         container.layer.shadowOffset = CGSize(width: -1, height: 1)
         container.layer.shadowRadius = 5
         
@@ -126,7 +181,7 @@ class CalenderViewController: UIViewController {
         barAmount.backgroundColor = color;
         barAmount.layer.cornerRadius = radius;
         barAmount.heightAnchor.constraint(equalTo: bar.heightAnchor).isActive = true;
-        barAmount.widthAnchor.constraint(equalTo: bar.widthAnchor, constant: width).isActive = true;
+        barAmount.widthAnchor.constraint(equalTo: bar.widthAnchor, multiplier: width).isActive = true;
         
         amountLabel.translatesAutoresizingMaskIntoConstraints = false;
         amountLabel.text = amount;
@@ -145,5 +200,31 @@ class CalenderViewController: UIViewController {
         titlelabel.layer.zPosition = 1; // acts as Z-Index
         
         return bar;
+    }
+    
+    private func CategoryBox(category: String, color: UIColor) -> UIView {
+        let parentView = UIView();
+        let childView = UIView();
+        let label = UILabel();
+        
+        parentView.addSubview(childView);
+        parentView.addSubview(label);
+        parentView.translatesAutoresizingMaskIntoConstraints = false;
+        parentView.widthAnchor.constraint(equalToConstant: 70).isActive = true;
+        parentView.heightAnchor.constraint(equalToConstant: 110).isActive = true;
+        
+        childView.translatesAutoresizingMaskIntoConstraints = false;
+        childView.widthAnchor.constraint(equalTo: parentView.widthAnchor).isActive = true;
+        childView.heightAnchor.constraint(equalTo: parentView.widthAnchor).isActive = true;
+        childView.backgroundColor = color;
+        childView.layer.cornerRadius = 15;
+        
+        label.text = category;
+        label.translatesAutoresizingMaskIntoConstraints = false;
+        label.topAnchor.constraint(equalTo: childView.bottomAnchor, constant: 10).isActive = true;
+        label.centerXAnchor.constraint(equalTo: parentView.centerXAnchor).isActive = true;
+        label.font = .systemFont(ofSize: 14, weight: .regular)
+        
+        return parentView;
     }
 }
