@@ -25,4 +25,16 @@ extension UIColor {
     static var ThemeSkyPink: UIColor {
         return UIColor(red: 238/255, green: 98/255, blue: 128/255, alpha: 1);
     }
+    
+    static var CategoryBlue: UIColor {
+        return UIColor(red: 247/255, green: 244/255, blue: 254/255, alpha: 1);
+    }
+    
+    static var CategoryPink: UIColor {
+        return UIColor(red: 253/255, green: 242/255, blue: 246/255, alpha: 1);
+    }
+    
+    static var CategoryOrange: UIColor {
+        return UIColor(red: 254/255, green: 246/255, blue: 240/255, alpha: 1);
+    }
 }
