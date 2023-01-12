@@ -34,7 +34,8 @@ class CalenderViewController: UIViewController {
         let categoryScroll = UIScrollView();
         let categoryStack = UIStackView();
         let montlyBudgetLabel = UILabel();
-        let budgetView = BudgetView();
+        let budgetScroll = UIScrollView();
+        let budgetStack = UIStackView();
         
         let categories: [Category] = [
             .init(title: "Houses", color: .CategoryBlue),
@@ -52,7 +53,7 @@ class CalenderViewController: UIViewController {
         scroller.addSubview(topSpendingLabel);
         scroller.addSubview(categoryScroll);
         scroller.addSubview(montlyBudgetLabel);
-        scroller.addSubview(budgetView);
+        scroller.addSubview(budgetScroll);
         scroller.contentSize = CGSize(width: UIScreen.main.bounds.width, height: 2000)
         scroller.translatesAutoresizingMaskIntoConstraints = false;
         scroller.topAnchor.constraint(equalTo: view.topAnchor).isActive = true;
@@ -99,8 +100,25 @@ class CalenderViewController: UIViewController {
         montlyBudgetLabel.leadingAnchor.constraint(equalTo: container.leadingAnchor).isActive = true;
         montlyBudgetLabel.topAnchor.constraint(equalTo: categoryScroll.bottomAnchor, constant: 20).isActive = true;
         
-        budgetView.leadingAnchor.constraint(equalTo: montlyBudgetLabel.leadingAnchor).isActive = true;
-        budgetView.topAnchor.constraint(equalTo: montlyBudgetLabel.bottomAnchor, constant: 20).isActive = true;
+        budgetScroll.translatesAutoresizingMaskIntoConstraints = false;
+        budgetScroll.contentSize = CGSize(width: UIScreen.main.bounds.width + 600, height: 110)
+        budgetScroll.topAnchor.constraint(equalTo: montlyBudgetLabel.bottomAnchor, constant: 20).isActive = true;
+        budgetScroll.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        budgetScroll.heightAnchor.constraint(equalToConstant: 140).isActive = true;
+        budgetScroll.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width).isActive = true;
+        budgetScroll.leadingAnchor.constraint(equalTo: montlyBudgetLabel.leadingAnchor).isActive = true
+        budgetScroll.addSubview(budgetStack);
+        budgetScroll.showsVerticalScrollIndicator = false;
+        budgetScroll.showsHorizontalScrollIndicator = false;
+        
+        budgetStack.axis = .horizontal;
+        budgetStack.alignment = .fill;
+        budgetStack.spacing = 10;
+        budgetStack.translatesAutoresizingMaskIntoConstraints = false;
+        budgetStack.heightAnchor.constraint(equalToConstant: 140).isActive = true;
+        budgetStack.addArrangedSubview(BudgetView(color: .CategoryPink, barColor: .ThemeSkyPink));
+        budgetStack.addArrangedSubview(BudgetView(color: .CategoryBlue, barColor: .ThemeBlue));
+        budgetStack.addArrangedSubview(BudgetView(color: .CategoryPink, barColor: .ThemeSkyPink));
         
         for category in categories {
             categoryStack.addArrangedSubview(CategoryBox(category: category.title, color: category.color));
@@ -232,12 +250,12 @@ class CalenderViewController: UIViewController {
         return parentView;
     }
     
-    private func BudgetView() -> UIView {
+    private func BudgetView(color: UIColor, barColor: UIColor) -> UIView {
         let container = UIView();
         let categoryBox = UIView();
         let titleLabel = UILabel();
         let amountLabel = UILabel();
-        let barView = BarGraphView(amount: "$1000.00", title: "$500.00", width: 0.5, color: .ThemeSkyPink);
+        let barView = BarGraphView(amount: "$1000.00", title: "$500.00", width: 0.5, color: barColor);
         
         container.backgroundColor = .white;
         container.layer.shadowColor = UIColor.gray.cgColor;
@@ -254,7 +272,7 @@ class CalenderViewController: UIViewController {
         container.addSubview(barView);
         
         categoryBox.layer.cornerRadius = 13;
-        categoryBox.backgroundColor = .CategoryPink;
+        categoryBox.backgroundColor = color;
         categoryBox.translatesAutoresizingMaskIntoConstraints = false;
         categoryBox.leadingAnchor.constraint(equalTo: container.leadingAnchor, constant: 20).isActive = true;
         categoryBox.topAnchor.constraint(equalTo: container.topAnchor, constant: 20).isActive = true;
