@@ -6,9 +6,9 @@ class TabBarController: UITabBarController {
         super.viewDidLoad();
         
         let calenderNavController = UINavigationController(rootViewController: CalenderViewController());
-        let homeViewController: ViewController = ViewController();
+        let homeNavController = UINavigationController(rootViewController: ViewController());
         
-        homeViewController.title = "Home";
+        homeNavController.title = "Home";
         calenderNavController.title = "Calender";
         
         self.tabBar.backgroundColor = .white;
@@ -17,6 +17,6 @@ class TabBarController: UITabBarController {
         self.tabBar.layer.shadowOffset = CGSize(width: 0, height: -1)
         self.tabBar.layer.shadowRadius = 5
         
-        self.setViewControllers([homeViewController, calenderNavController], animated: false);
+        self.setViewControllers([homeNavController, calenderNavController], animated: false);
     }
 }

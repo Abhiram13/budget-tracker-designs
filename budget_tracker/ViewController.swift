@@ -85,6 +85,16 @@ class ViewController: UIViewController, UIScrollViewDelegate {
     let transactionScroll = UIScrollView();
     let addButton: UIButton = AddButton();
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: animated)
+    }
+    
     override func viewDidLoad() {
         let labelStack = UIStackView();
         let labels: [ChartLabelwithColor] = [
@@ -192,8 +202,6 @@ class ScrollView: UIScrollView {
     }
     
     private func initlize() -> Void {
-        let stack = StackView();
-        
         // gradient not working here
         let gradient = CAGradientLayer()
         gradient.colors = [UIColor.ThemePurple.cgColor, UIColor.ThemeBlue.cgColor];
@@ -202,8 +210,7 @@ class ScrollView: UIScrollView {
         gradient.frame = self.bounds
         layer.insertSublayer(gradient, at: 0)
         
-        contentSize = CGSize(width: 100, height: 100)
-        addSubview(stack);
+        contentSize = CGSize(width: 100, height: 50)
         translatesAutoresizingMaskIntoConstraints = false;
         backgroundColor = .ThemePurple;
         topAnchor.constraint(equalTo: parent.topAnchor).isActive = true
@@ -242,8 +249,8 @@ class StackView: UIStackView {
         leftAnchor.constraint(equalTo: parent.leftAnchor).isActive = true
         rightAnchor.constraint(equalTo: parent.rightAnchor).isActive = true
         bottomAnchor.constraint(equalTo: parent.bottomAnchor).isActive = true
-        heightAnchor.constraint(equalToConstant: 100).isActive = true
-        axis = .horizontal;
+        heightAnchor.constraint(equalToConstant: 50).isActive = true
+        axis = .horizontal;        
         
         for month in DateFormatter().monthSymbols {
             let label = UILabel();
