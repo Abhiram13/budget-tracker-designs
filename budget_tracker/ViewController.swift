@@ -83,7 +83,7 @@ class ViewController: UIViewController, UIScrollViewDelegate {
     let chartContainer = UIView();
     let transactionStack = UIStackView();
     let transactionScroll = UIScrollView();
-    let addButton: UIButton = AddButton();
+    var addButton = AddButton();
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -93,6 +93,18 @@ class ViewController: UIViewController, UIScrollViewDelegate {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         navigationController?.setNavigationBarHidden(false, animated: animated)
+    }
+    
+    @objc func goToForm() {
+        navigationController?.pushViewController(FormViewController(), animated: true);
+    }
+    
+    required init() {
+        super.init(nibName: nil, bundle: nil);
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder);
     }
     
     override func viewDidLoad() {
@@ -168,6 +180,8 @@ class ViewController: UIViewController, UIScrollViewDelegate {
         labelStack.heightAnchor.constraint(equalTo: chartContainer.heightAnchor, constant: -20).isActive = true;
         labelStack.leadingAnchor.constraint(equalTo: chartContainer.leadingAnchor, constant: 100).isActive = true;
         labelStack.topAnchor.constraint(equalTo: chartContainer.topAnchor, constant: 10).isActive = true;
+        
+        addButton.addTarget(self, action: #selector(self.goToForm), for: .touchUpInside);
         
         for label in labels {
             let stackLabel = ChartLabels(color: label.color, label: label.label);

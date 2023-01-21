@@ -17,6 +17,7 @@
 		83B244E0295821D1003437A1 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B244DF295821D1003437A1 /* TabBarController.swift */; };
 		83B244E429585951003437A1 /* ScheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B244E329585951003437A1 /* ScheduleView.swift */; };
 		83B244E629585998003437A1 /* RevenueView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B244E529585998003437A1 /* RevenueView.swift */; };
+		83B78C4A297B96110040D2D7 /* FormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B78C49297B96110040D2D7 /* FormViewController.swift */; };
 		83B9A58C2945C97700B70380 /* DbController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B9A58B2945C97700B70380 /* DbController.swift */; };
 		83B9A58E2945CAF000B70380 /* TransactionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B9A58D2945CAF000B70380 /* TransactionController.swift */; };
 		83B9A5912945EBD300B70380 /* DateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B9A5902945EBD300B70380 /* DateManager.swift */; };
@@ -39,6 +40,7 @@
 		83B244DF295821D1003437A1 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		83B244E329585951003437A1 /* ScheduleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleView.swift; sourceTree = "<group>"; };
 		83B244E529585998003437A1 /* RevenueView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RevenueView.swift; sourceTree = "<group>"; };
+		83B78C49297B96110040D2D7 /* FormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormViewController.swift; sourceTree = "<group>"; };
 		83B9A58B2945C97700B70380 /* DbController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DbController.swift; sourceTree = "<group>"; };
 		83B9A58D2945CAF000B70380 /* TransactionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionController.swift; sourceTree = "<group>"; };
 		83B9A5902945EBD300B70380 /* DateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateManager.swift; sourceTree = "<group>"; };
@@ -136,6 +138,7 @@
 			isa = PBXGroup;
 			children = (
 				83B9A5932945F2AD00B70380 /* CalenderViewController.swift */,
+				83B78C49297B96110040D2D7 /* FormViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -214,6 +217,7 @@
 				834477672945815D00E9739E /* ViewController.swift in Sources */,
 				83BBE1E52959839D008690B7 /* StackLabels.swift in Sources */,
 				83A319E22957366C00222C0F /* Colors.swift in Sources */,
+				83B78C4A297B96110040D2D7 /* FormViewController.swift in Sources */,
 				83B9A5912945EBD300B70380 /* DateManager.swift in Sources */,
 				83B244E0295821D1003437A1 /* TabBarController.swift in Sources */,
 				83B244E629585998003437A1 /* RevenueView.swift in Sources */,
