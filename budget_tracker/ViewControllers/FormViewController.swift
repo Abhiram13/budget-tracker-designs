@@ -2,57 +2,76 @@ import Foundation;
 import UIKit;
 
 class FormViewController: UIViewController {
-    let text = TextField();
-    let button = UIButton();
-    var toggle: Bool = false;
-    let label = UILabel();
-    var txt: String = "Button";
+    let descriptionField = TextField(placeholder: "Description", keyboard: .asciiCapable);
+    let amountField = TextField(placeholder: "Amount", keyboard: .numberPad);
+    let fromBankField = TextField(placeholder: "From bank", keyboard: .asciiCapable);
+    let toBankField = TextField(placeholder: "To bank", keyboard: .asciiCapable);
+    let categoryField = TextField(placeholder: "Category", keyboard: .asciiCapable);
+    let dateInput = TextField(placeholder: "Transaction Date", keyboard: .default);
     let datePicker = UIDatePicker();
-    let dateInput = TextField();
+    let submitButton = UIButton();
     
     override func viewDidLoad() {
         super.viewDidLoad();
-        view.backgroundColor = .green;
         self.tabBarController?.tabBar.isHidden = true;
-        view.addSubview(text);
-        view.addSubview(button);
-        view.addSubview(label);
+        view.backgroundColor = .white;
+        view.addSubview(descriptionField);
+        view.addSubview(amountField);
+        view.addSubview(fromBankField);
+        view.addSubview(toBankField);
+        view.addSubview(categoryField);
         view.addSubview(dateInput);
+        view.addSubview(submitButton);
         
-        label.text = txt;
-        label.isUserInteractionEnabled = false;
-        label.translatesAutoresizingMaskIntoConstraints = false;
-        label.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 50).isActive = true;
+        descriptionField.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9).isActive = true;
+        descriptionField.heightAnchor.constraint(equalToConstant: 50).isActive = true;
+        descriptionField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true;
+        descriptionField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true;
         
-        text.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9).isActive = true;
-        text.heightAnchor.constraint(equalToConstant: 50).isActive = true;
-        text.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true;
-        text.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true;
-
-        button.setTitle(txt, for: .normal)
-        button.addTarget(self, action: #selector(click), for: .touchUpInside);
-        button.translatesAutoresizingMaskIntoConstraints = false;
-        button.topAnchor.constraint(equalTo: text.bottomAnchor, constant: 20).isActive = true;
-        button.leadingAnchor.constraint(equalTo: text.leadingAnchor).isActive = true;
+        amountField.widthAnchor.constraint(equalTo: descriptionField.widthAnchor).isActive = true;
+        amountField.heightAnchor.constraint(equalTo: descriptionField.heightAnchor).isActive = true;
+        amountField.leadingAnchor.constraint(equalTo: descriptionField.leadingAnchor).isActive = true;
+        amountField.topAnchor.constraint(equalTo: descriptionField.bottomAnchor, constant: 20).isActive = true;
+        
+        fromBankField.widthAnchor.constraint(equalTo: amountField.widthAnchor).isActive = true;
+        fromBankField.heightAnchor.constraint(equalTo: amountField.heightAnchor).isActive = true;
+        fromBankField.leadingAnchor.constraint(equalTo: amountField.leadingAnchor).isActive = true;
+        fromBankField.topAnchor.constraint(equalTo: amountField.bottomAnchor, constant: 20).isActive = true;
+        fromBankField.addTarget(self, action: #selector(fromBankAction), for: .touchDown);
+        
+        toBankField.widthAnchor.constraint(equalTo: fromBankField.widthAnchor).isActive = true;
+        toBankField.heightAnchor.constraint(equalTo: fromBankField.heightAnchor).isActive = true;
+        toBankField.leadingAnchor.constraint(equalTo: fromBankField.leadingAnchor).isActive = true;
+        toBankField.topAnchor.constraint(equalTo: fromBankField.bottomAnchor, constant: 20).isActive = true;
+        toBankField.addTarget(self, action: #selector(toBankAction), for: .touchDown);
+        
+        categoryField.widthAnchor.constraint(equalTo: toBankField.widthAnchor).isActive = true;
+        categoryField.heightAnchor.constraint(equalTo: toBankField.heightAnchor).isActive = true;
+        categoryField.leadingAnchor.constraint(equalTo: toBankField.leadingAnchor).isActive = true;
+        categoryField.topAnchor.constraint(equalTo: toBankField.bottomAnchor, constant: 20).isActive = true;
+        categoryField.addTarget(self, action: #selector(click), for: .touchDown);
         
         dateInput.translatesAutoresizingMaskIntoConstraints = false;
-        dateInput.topAnchor.constraint(equalTo: button.bottomAnchor, constant: 20).isActive = true;
-        dateInput.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9).isActive = true;
+        dateInput.topAnchor.constraint(equalTo: categoryField.bottomAnchor, constant: 20).isActive = true;
+        dateInput.widthAnchor.constraint(equalTo: categoryField.widthAnchor).isActive = true;
         dateInput.heightAnchor.constraint(equalToConstant: 50).isActive = true;
-        dateInput.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true;
+        dateInput.leadingAnchor.constraint(equalTo: categoryField.leadingAnchor).isActive = true;
+        
+        submitButton.setTitle("Submit", for: .normal)
+        submitButton.addTarget(self, action: #selector(submit), for: .touchUpInside);
+        submitButton.translatesAutoresizingMaskIntoConstraints = false;
+        submitButton.topAnchor.constraint(equalTo: dateInput.bottomAnchor, constant: 20).isActive = true;
+        submitButton.leadingAnchor.constraint(equalTo: dateInput.leadingAnchor).isActive = true;
+        submitButton.heightAnchor.constraint(equalToConstant: 50).isActive = true;
+        submitButton.widthAnchor.constraint(equalTo: dateInput.widthAnchor).isActive = true;
+        submitButton.layer.cornerRadius = 10;
+        submitButton.backgroundColor = .systemBlue;
         
         createDatePicker();
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         self.tabBarController?.tabBar.isHidden = false;
-    }
-    
-    @objc private func click() {
-        self.modalPresentationStyle = .fullScreen;
-        self.present(ChildViewController() { data in
-            self.label.text = data;
-        }, animated: true, completion: nil);
     }
     
     private func toolBarForDate() -> UIToolbar {
@@ -82,16 +101,48 @@ class FormViewController: UIViewController {
         dateInput.text = dateFormat.string(from: datePicker.date);
         view.endEditing(true);
     }
+    
+    @objc private func click() {
+        self.modalPresentationStyle = .fullScreen;
+        self.present(ChildViewController() { data in
+            self.categoryField.text = data;
+        }, animated: true, completion: nil);
+    }
+    
+    @objc private func fromBankAction() {
+        self.modalPresentationStyle = .fullScreen;
+        self.present(ChildViewController() { data in
+            self.fromBankField.text = data;
+        }, animated: true, completion: nil);
+    }
+    
+    @objc private func toBankAction() {
+        self.modalPresentationStyle = .fullScreen;
+        self.present(ChildViewController() { data in
+            self.toBankField.text = data;
+        }, animated: true, completion: nil);
+    }
+    
+    @objc private func submit() {
+        print("description: \(descriptionField.text!)");
+        print("amount: \(amountField.text!)");
+        print("from bank: \(fromBankField.text!)");
+        print("to bank: \(toBankField.text!)");
+        print("catgeory: \(categoryField.text!)");
+        print("date: \(dateInput.text!)");
+    }
 }
 
-func TextField() -> UITextField {
+func TextField(placeholder: String, keyboard: UIKeyboardType) -> UITextField {
     let textField = UITextField();
     textField.text = "";
-    textField.placeholder = "Hello World";
+    textField.placeholder = placeholder;
     textField.translatesAutoresizingMaskIntoConstraints = false;
     textField.layer.borderWidth = 2;
     textField.layer.borderColor = UIColor.black.cgColor;
     textField.layer.cornerRadius = 10;
+    textField.textAlignment = .center;
+    textField.keyboardType = keyboard;
     
     return textField;
 }
