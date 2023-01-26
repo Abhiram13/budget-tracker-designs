@@ -6,7 +6,7 @@ class FormViewController: UIViewController {
     let button = UIButton();
     var toggle: Bool = false;
     let label = UILabel();
-    var txt: String = "";
+    var txt: String = "Button";
     
     override func viewDidLoad() {
         super.viewDidLoad();
@@ -26,7 +26,7 @@ class FormViewController: UIViewController {
         text.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true;
         text.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true;
 
-        button.setTitle("Button", for: .normal)
+        button.setTitle(txt, for: .normal)
         button.addTarget(self, action: #selector(click), for: .touchUpInside);
         button.translatesAutoresizingMaskIntoConstraints = false;
         button.topAnchor.constraint(equalTo: text.bottomAnchor, constant: 20).isActive = true;
@@ -61,7 +61,7 @@ func TextField() -> UITextField {
 
 class ChildViewController: UIViewController {
     var callBack: ((_ data: String) -> Void);
-    let banks: [String] = ["Text one", "Text one", "Text one", "Text one"];
+    let banks: [String] = ["Text one", "Text two", "Text three", "Text four"];
     let stack = UIStackView();
     let scroll = UIScrollView();
     
@@ -92,9 +92,14 @@ class ChildViewController: UIViewController {
         
         for bank in banks {
             let label = UILabel();
+            let tapGesture = CustomTapGesture(target: self, action: #selector(tap));
             label.text = bank;
             label.translatesAutoresizingMaskIntoConstraints = false;
             label.heightAnchor.constraint(equalToConstant: 50).isActive = true;
+            label.isUserInteractionEnabled = true;
+//            label.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tap)));
+            label.addGestureRecognizer(tapGesture);
+            tapGesture.value = bank;
             stack.addArrangedSubview(label);
         }
         
@@ -102,8 +107,16 @@ class ChildViewController: UIViewController {
             scroll.widthAnchor.constraint(equalTo: view.widthAnchor),
             scroll.heightAnchor.constraint(equalTo: view.heightAnchor),
             stack.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -30),
-            stack.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
+            stack.topAnchor.constraint(equalTo: scroll.topAnchor, constant: 20),
             stack.centerXAnchor.constraint(equalTo: view.centerXAnchor),
         ]);
     }
+    
+    @objc private func tap(sender: CustomTapGesture) {
+        print(sender.value!);
+    }
+}
+
+class CustomTapGesture: UITapGestureRecognizer {
+    var value: String?;
 }
