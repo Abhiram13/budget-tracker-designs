@@ -7,6 +7,8 @@ class FormViewController: UIViewController {
     var toggle: Bool = false;
     let label = UILabel();
     var txt: String = "Button";
+    let datePicker = UIDatePicker();
+    let dateInput = TextField();
     
     override func viewDidLoad() {
         super.viewDidLoad();
@@ -15,6 +17,7 @@ class FormViewController: UIViewController {
         view.addSubview(text);
         view.addSubview(button);
         view.addSubview(label);
+        view.addSubview(dateInput);
         
         label.text = txt;
         label.isUserInteractionEnabled = false;
@@ -31,6 +34,14 @@ class FormViewController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false;
         button.topAnchor.constraint(equalTo: text.bottomAnchor, constant: 20).isActive = true;
         button.leadingAnchor.constraint(equalTo: text.leadingAnchor).isActive = true;
+        
+        dateInput.translatesAutoresizingMaskIntoConstraints = false;
+        dateInput.topAnchor.constraint(equalTo: button.bottomAnchor, constant: 20).isActive = true;
+        dateInput.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9).isActive = true;
+        dateInput.heightAnchor.constraint(equalToConstant: 50).isActive = true;
+        dateInput.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true;
+        
+        createDatePicker();
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -42,6 +53,34 @@ class FormViewController: UIViewController {
         self.present(ChildViewController() { data in
             self.label.text = data;
         }, animated: true, completion: nil);
+    }
+    
+    private func toolBarForDate() -> UIToolbar {
+        let toolbar = UIToolbar();
+        toolbar.sizeToFit();
+        
+        let doneBtn = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneForDate));
+        toolbar.setItems([doneBtn], animated: true);
+        
+        return toolbar;
+    }
+    
+    private func createDatePicker() {
+        datePicker.preferredDatePickerStyle = .wheels;
+        datePicker.datePickerMode = .date;
+        
+        dateInput.textAlignment = .center;
+        dateInput.inputAccessoryView = toolBarForDate();
+        dateInput.inputView = datePicker;
+    }
+    
+    @objc private func doneForDate() {
+        let dateFormat = DateFormatter();
+        dateFormat.dateStyle = .medium;
+        dateFormat.timeStyle = .none;
+        
+        dateInput.text = dateFormat.string(from: datePicker.date);
+        view.endEditing(true);
     }
 }
 
