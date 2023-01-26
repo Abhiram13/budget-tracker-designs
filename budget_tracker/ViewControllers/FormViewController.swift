@@ -16,7 +16,7 @@ class FormViewController: UIViewController {
         view.addSubview(button);
         view.addSubview(label);
         
-        label.text = "Hello World";
+        label.text = txt;
         label.isUserInteractionEnabled = false;
         label.translatesAutoresizingMaskIntoConstraints = false;
         label.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 50).isActive = true;
@@ -38,12 +38,10 @@ class FormViewController: UIViewController {
     }
     
     @objc private func click() {
-        print("First: \(txt)");
         self.modalPresentationStyle = .fullScreen;
         self.present(ChildViewController() { data in
-            self.txt = data;
+            self.label.text = data;
         }, animated: true, completion: nil);
-        print("Second: \(txt)");
     }
 }
 
@@ -76,8 +74,7 @@ class ChildViewController: UIViewController {
     }
     
     override func viewDidLoad() {
-        self.view.backgroundColor = .white;
-        self.callBack("asdh");
+        self.view.backgroundColor = .white;        
         
         view.addSubview(scroll);
         scroll.addSubview(stack);
@@ -97,7 +94,6 @@ class ChildViewController: UIViewController {
             label.translatesAutoresizingMaskIntoConstraints = false;
             label.heightAnchor.constraint(equalToConstant: 50).isActive = true;
             label.isUserInteractionEnabled = true;
-//            label.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tap)));
             label.addGestureRecognizer(tapGesture);
             tapGesture.value = bank;
             stack.addArrangedSubview(label);
@@ -113,7 +109,8 @@ class ChildViewController: UIViewController {
     }
     
     @objc private func tap(sender: CustomTapGesture) {
-        print(sender.value!);
+        self.callBack(sender.value!);
+        self.dismiss(animated: true);
     }
 }
 
